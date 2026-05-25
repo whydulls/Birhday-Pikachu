@@ -646,12 +646,12 @@
   let isLooping = false;
 
   // Nama lagu & artis — ganti sesuai lagu kamu
-  document.getElementById('track-name').textContent = 'Nama Lagu Kamu 🎵';
-  document.getElementById('track-artist').textContent = 'Nama Artis';
+  document.getElementById('track-name').textContent = 'fearless';
+  document.getElementById('track-artist').textContent = 'Taylor swift';
 
   function togglePlay() {
-    if (audio.src.includes('GANTI_DENGAN_URL_MUSIK_KAMU')) {
-      alert('🎵 Ganti dulu URL musik di kode HTML ya! Cari: GANTI_DENGAN_URL_MUSIK_KAMU');
+    if (audio.src.includes('fearless.mp3')) {
+      alert('🎵 fearless');
       return;
     }
     if (isPlaying) { audio.pause(); isPlaying = false; document.getElementById('play-btn').textContent = '▶'; }
@@ -694,7 +694,7 @@
 
   // ===== TOGETHER COUNTER =====
   // GANTI tanggal di bawah dengan tanggal mulai pacaran kamu (YYYY-MM-DD)
-  const START_DATE = new Date('2024-08-09T00:00:00');
+  const START_DATE = new Date('2025-11-02T00:00:00');
 
   function updateTogetherCounter() {
     function tick() {
