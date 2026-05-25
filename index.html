@@ -6,353 +6,210 @@
 <title>for u, pikachu 🩷</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
+* { margin:0; padding:0; box-sizing:border-box; }
 :root {
   --bg: #e8f0fe;
+  --bg2: #dce8fd;
   --blue-dark: #1e3a8a;
   --blue-mid: #2d5be3;
   --blue-btn: #1e3a8a;
-  --blue-btn2: #2d4fd6;
-  --text-dark: #1a2e6b;
   --font: 'Nunito', sans-serif;
 }
-
-html, body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text-dark);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+html,body { font-family:var(--font); background:var(--bg); color:var(--blue-dark); min-height:100vh; overflow-x:hidden; }
 
 /* ===== MUSIC FAB ===== */
 #music-fab {
-  position: fixed;
-  top: 18px; right: 18px;
-  width: 46px; height: 46px;
-  border-radius: 50%;
-  background: white;
-  border: 2.5px solid var(--blue-mid);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
-  cursor: pointer;
-  z-index: 999;
-  box-shadow: 0 2px 12px rgba(45,91,227,0.15);
-  transition: transform 0.2s;
+  position:fixed; top:18px; right:18px;
+  width:46px; height:46px; border-radius:50%;
+  background:white; border:2.5px solid var(--blue-mid);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem; cursor:pointer; z-index:999;
+  box-shadow:0 2px 12px rgba(45,91,227,.18);
+  transition:transform .2s;
 }
-#music-fab:hover { transform: scale(1.1); }
+#music-fab.spin { animation:spinNote 1s linear infinite; }
+@keyframes spinNote { to { transform:rotate(360deg); } }
+#music-fab:hover { transform:scale(1.1); }
 
 /* ===== PAGE SYSTEM ===== */
 .page {
-  display: none;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  text-align: center;
-  background: linear-gradient(160deg, #e8f0fe 0%, #dce8fd 100%);
-  position: relative;
-  overflow: hidden;
+  display:none; min-height:100vh;
+  flex-direction:column; align-items:center; justify-content:center;
+  padding:40px 24px; text-align:center;
+  background:linear-gradient(160deg,#e8f0fe 0%,#dce8fd 100%);
+  position:relative; overflow:hidden;
 }
-.page.active { display: flex; }
+.page.active { display:flex; }
 
-.char-svg { width: 150px; height: 150px; margin-bottom: 20px; }
+/* ===== ANIMATED CHAR ===== */
+.char-wrap { margin-bottom:20px; position:relative; }
+.char-wrap svg { display:block; }
+.bounce { animation:bounceAnim 2s ease-in-out infinite; }
+.wobble { animation:wobbleAnim 2.5s ease-in-out infinite; }
+.shake-idle { animation:shakeIdle 1.8s ease-in-out infinite; }
+.pulse-big { animation:pulseBig 1.5s ease-in-out infinite; }
+.float { animation:floatChar 3s ease-in-out infinite; }
+@keyframes bounceAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+@keyframes wobbleAnim { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
+@keyframes shakeIdle { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+@keyframes pulseBig { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+@keyframes floatChar { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(2deg)} }
 
 /* ===== TYPOGRAPHY ===== */
-.title-big {
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: var(--blue-dark);
-  line-height: 1.4;
-  margin-bottom: 14px;
-}
-.title-big.blue { color: var(--blue-mid); }
-.body-text {
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #3a5a8a;
-  line-height: 1.7;
-  margin-bottom: 12px;
-  max-width: 340px;
-}
+.title-big { font-size:1.4rem; font-weight:800; color:var(--blue-dark); line-height:1.4; margin-bottom:14px; }
+.title-big.blue { color:var(--blue-mid); }
+.body-text { font-size:.95rem; font-weight:400; color:#3a5a8a; line-height:1.75; margin-bottom:12px; max-width:340px; }
 
 /* ===== BUTTONS ===== */
-.btn {
-  display: inline-block;
-  padding: 14px 36px;
-  border-radius: 50px;
-  font-family: var(--font);
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.btn:active { transform: scale(0.96); }
-.btn-solid {
-  background: var(--blue-btn);
-  color: white;
-  box-shadow: 0 4px 16px rgba(30,58,138,0.25);
-}
-.btn-solid:hover { background: var(--blue-btn2); }
-.btn-outline {
-  background: transparent;
-  color: var(--blue-dark);
-  border: 2px solid var(--blue-dark);
-}
-.btn-row { display: flex; gap: 14px; justify-content: center; }
+.btn { display:inline-block; padding:14px 36px; border-radius:50px; font-family:var(--font); font-size:1rem; font-weight:700; cursor:pointer; border:none; transition:transform .15s,box-shadow .15s; }
+.btn:active { transform:scale(.96); }
+.btn-solid { background:var(--blue-btn); color:white; box-shadow:0 4px 16px rgba(30,58,138,.25); }
+.btn-solid:hover { background:#2d4fd6; }
+.btn-outline { background:transparent; color:var(--blue-dark); border:2px solid var(--blue-dark); }
+.btn-row { display:flex; gap:14px; justify-content:center; }
+.btn-circle { width:60px; height:60px; border-radius:50%; background:var(--blue-btn); color:white; font-size:.9rem; font-weight:800; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; border:none; box-shadow:0 4px 16px rgba(30,58,138,.25); transition:transform .15s; }
+.btn-circle:hover { transform:scale(1.08); }
 
-.btn-circle {
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  background: var(--blue-btn);
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 800;
-  display: inline-flex; align-items: center; justify-content: center;
-  cursor: pointer; border: none;
-  box-shadow: 0 4px 16px rgba(30,58,138,0.25);
-  transition: transform 0.15s;
-}
-.btn-circle:hover { transform: scale(1.08); }
+/* ===== PASSWORD ===== */
+#page-pw { justify-content:flex-start; padding-top:55px; }
+.pw-dots { display:flex; gap:14px; justify-content:center; margin:18px 0 28px; }
+.pw-dot { width:22px; height:22px; border-radius:50%; border:2.5px solid var(--blue-mid); background:transparent; transition:background .2s; }
+.pw-dot.filled { background:var(--blue-mid); }
+.numpad { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; width:min(340px,90vw); }
+.num-btn { aspect-ratio:1.4/1; background:white; border:none; border-radius:18px; font-family:var(--font); font-size:1.6rem; font-weight:800; color:var(--blue-dark); cursor:pointer; box-shadow:0 3px 10px rgba(30,58,138,.1); transition:transform .1s; }
+.num-btn:active { transform:scale(.92); }
+.num-btn.empty { background:transparent; box-shadow:none; pointer-events:none; }
+.pw-clue { margin-top:20px; font-size:.85rem; color:var(--blue-mid); font-weight:600; }
+.pw-error { margin-top:8px; font-size:.82rem; color:#e53e3e; min-height:18px; font-weight:700; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+.shake { animation:shake .4s; }
 
-/* ===== PASSWORD PAGE ===== */
-#page-pw {
-  justify-content: flex-start;
-  padding-top: 60px;
-}
-.pw-dots {
-  display: flex; gap: 14px; justify-content: center;
-  margin: 18px 0 28px;
-}
-.pw-dot {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  border: 2.5px solid var(--blue-mid);
-  background: transparent;
-  transition: background 0.2s;
-}
-.pw-dot.filled { background: var(--blue-mid); }
+/* ===== PHOTO ===== */
+.photo-frame { width:min(340px,90vw); border-radius:16px; overflow:hidden; margin-bottom:20px; box-shadow:0 4px 20px rgba(30,58,138,.14); aspect-ratio:4/3; background:#cdd9f5; }
+.photo-frame img,.photo-frame video { width:100%; height:100%; object-fit:cover; display:block; }
 
-.numpad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  width: min(340px, 90vw);
+/* ===== SPOTIFY PLAYER ===== */
+.spotify-card {
+  width:min(340px,90vw);
+  background:linear-gradient(145deg,#1a1a2e,#2d2d4e);
+  border-radius:20px; padding:20px;
+  box-shadow:0 8px 32px rgba(0,0,0,.35);
+  margin-bottom:20px;
 }
-.num-btn {
-  aspect-ratio: 1.4/1;
-  background: white;
-  border: none;
-  border-radius: 18px;
-  font-family: var(--font);
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--blue-dark);
-  cursor: pointer;
-  box-shadow: 0 3px 10px rgba(30,58,138,0.1);
-  transition: transform 0.1s;
-}
-.num-btn:active { transform: scale(0.93); }
-.num-btn.empty { background: transparent; box-shadow: none; pointer-events: none; }
-.pw-clue { margin-top: 20px; font-size: 0.85rem; color: var(--blue-mid); font-weight: 600; }
-.pw-error { margin-top: 8px; font-size: 0.82rem; color: #e53e3e; min-height: 18px; font-weight: 700; }
+.sp-header { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.sp-cover { width:72px; height:72px; border-radius:10px; overflow:hidden; flex-shrink:0; }
+.sp-cover img { width:100%; height:100%; object-fit:cover; }
+.sp-meta { flex:1; }
+.sp-playlist-name { font-size:.95rem; font-weight:800; color:white; }
+.sp-playlist-sub { font-size:.75rem; color:#aaa; margin-top:3px; }
+.sp-logo { font-size:1.4rem; margin-left:auto; }
 
-@keyframes shake {
-  0%,100%{transform:translateX(0)}
-  20%,60%{transform:translateX(-8px)}
-  40%,80%{transform:translateX(8px)}
-}
-.shake { animation: shake 0.4s; }
+/* Now playing bar */
+.sp-now { background:rgba(255,255,255,.08); border-radius:12px; padding:12px 14px; margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+.sp-now-art { width:42px; height:42px; border-radius:8px; overflow:hidden; background:#444; flex-shrink:0; }
+.sp-now-art img { width:100%; height:100%; object-fit:cover; }
+.sp-now-info { flex:1; min-width:0; }
+.sp-now-name { font-size:.88rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sp-now-artist { font-size:.75rem; color:#aaa; margin-top:2px; }
+.sp-controls { display:flex; align-items:center; gap:10px; }
+.sp-ctrl-btn { background:none; border:none; cursor:pointer; font-size:1rem; color:#ccc; padding:4px; transition:transform .15s,color .15s; }
+.sp-ctrl-btn:hover { color:white; transform:scale(1.15); }
+.sp-play-btn { width:36px; height:36px; border-radius:50%; background:#1DB954; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.95rem; color:white; transition:transform .15s; flex-shrink:0; }
+.sp-play-btn:hover { transform:scale(1.1); }
 
-/* ===== PHOTO PAGES ===== */
-.photo-frame {
-  width: min(340px, 90vw);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 20px rgba(30,58,138,0.12);
-  aspect-ratio: 4/3;
-}
-.photo-frame img, .photo-frame video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
+/* Progress */
+.sp-progress { margin-bottom:14px; }
+.sp-prog-bar { height:4px; background:rgba(255,255,255,.2); border-radius:99px; cursor:pointer; position:relative; }
+.sp-prog-fill { height:100%; background:#1DB954; border-radius:99px; width:0%; transition:width .5s linear; }
+.sp-prog-times { display:flex; justify-content:space-between; font-size:.7rem; color:#888; margin-top:5px; }
 
-/* ===== PLAYLIST CARD ===== */
-.playlist-card {
-  width: min(340px, 90vw);
-  background: #5c3d5e;
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 24px;
-  box-shadow: 0 6px 24px rgba(92,61,94,0.35);
-}
-.playlist-header {
-  display: flex; align-items: flex-start; gap: 16px;
-  margin-bottom: 18px;
-}
-.playlist-cover {
-  width: 80px; height: 80px;
-  border-radius: 12px;
-  overflow: hidden; flex-shrink: 0;
-}
-.playlist-cover img { width: 100%; height: 100%; object-fit: cover; }
-.playlist-meta { flex: 1; }
-.playlist-title { font-size: 1rem; font-weight: 800; color: white; margin-bottom: 4px; }
-.playlist-by { font-size: 0.8rem; color: #c9aed4; }
-.spotify-icon {
-  width: 28px; height: 28px;
-  background: white; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.75rem; font-weight: 900; color: #1DB954;
-  flex-shrink: 0;
-}
+/* Track list */
+.sp-track { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07); cursor:pointer; transition:background .15s; border-radius:8px; padding-left:4px; }
+.sp-track:last-child { border-bottom:none; }
+.sp-track:hover { background:rgba(255,255,255,.06); }
+.sp-track.playing .sp-tname { color:#1DB954; }
+.sp-track-num { width:18px; font-size:.8rem; color:#888; text-align:center; flex-shrink:0; }
+.sp-track-art { width:38px; height:38px; border-radius:6px; overflow:hidden; background:#444; flex-shrink:0; }
+.sp-track-art img { width:100%; height:100%; object-fit:cover; }
+.sp-track-info { flex:1; min-width:0; text-align:left; }
+.sp-tname { font-size:.85rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sp-tartist { font-size:.73rem; color:#888; margin-top:2px; }
+.sp-tdur { font-size:.78rem; color:#888; flex-shrink:0; }
+.sp-eq { display:none; font-size:.7rem; }
+.sp-track.playing .sp-eq { display:block; color:#1DB954; animation:eqAnim .8s steps(3) infinite; }
+.sp-track.playing .sp-track-num { display:none; }
+@keyframes eqAnim { 0%{content:'▁▃▅'} 33%{content:'▃▅▁'} 66%{content:'▅▁▃'} }
 
-.track-list { display: flex; flex-direction: column; }
-.track-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.track-item:last-child { border-bottom: none; }
-.track-num { width: 20px; font-size: 0.85rem; color: #c9aed4; font-weight: 700; text-align: center; }
-.track-info { flex: 1; text-align: left; }
-.track-name { font-size: 0.9rem; color: white; font-weight: 700; }
-.track-artist { font-size: 0.75rem; color: #c9aed4; margin-top: 2px; }
-.track-dur { font-size: 0.82rem; color: #c9aed4; font-weight: 600; }
+/* ===== SCROLLABLE LETTER ===== */
+#page-final { justify-content:flex-start; padding-top:70px; padding-bottom:60px; }
+.floating-emojis { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.float-em { position:absolute; animation:floatEm linear; font-size:1.6rem; opacity:0; }
+@keyframes floatEm { 0%{transform:translateY(100vh) rotate(-15deg);opacity:0} 10%{opacity:1} 90%{opacity:.8} 100%{transform:translateY(-80px) rotate(15deg);opacity:0} }
 
-/* ===== FINAL PAGE ===== */
-#page-final { justify-content: flex-start; padding-top: 80px; }
-.floating-emojis { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-.float-em {
-  position: absolute;
-  animation: floatEm linear infinite;
-  font-size: 1.6rem; opacity: 0;
+.letter-wrap { position:relative; z-index:2; width:min(360px,92vw); }
+.letter-card {
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(8px);
+  border-radius:20px;
+  padding:28px 24px 32px;
+  box-shadow:0 4px 24px rgba(30,58,138,.12);
+  max-height:65vh;
+  overflow-y:auto;
+  scroll-behavior:smooth;
+  text-align:left;
 }
-@keyframes floatEm {
-  0%   { transform: translateY(100vh) rotate(-15deg); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 0.8; }
-  100% { transform: translateY(-80px) rotate(15deg); opacity: 0; }
-}
-.letter-box {
-  background: rgba(255,255,255,0.6);
-  border-radius: 18px;
-  padding: 28px 24px;
-  max-width: 360px;
-  text-align: left;
-  position: relative; z-index: 1;
-  box-shadow: 0 4px 20px rgba(30,58,138,0.1);
-  margin-bottom: 20px;
-}
-.letter-box h2 { font-size: 1.2rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 14px; }
-.letter-box p {
-  font-size: 0.92rem; color: #2a4a7a; line-height: 1.75;
-  border-left: 3px solid var(--blue-mid); padding-left: 12px;
-}
+.letter-card::-webkit-scrollbar { width:4px; }
+.letter-card::-webkit-scrollbar-thumb { background:#2d5be3; border-radius:99px; }
+.letter-title { font-size:1.15rem; font-weight:900; color:var(--blue-dark); margin-bottom:16px; text-align:center; }
+.letter-para { font-size:.93rem; color:#2a4a7a; line-height:1.8; margin-bottom:14px; border-left:3px solid var(--blue-mid); padding-left:12px; }
+.letter-sign { font-size:.9rem; font-weight:700; color:var(--blue-mid); margin-top:18px; text-align:right; font-style:italic; }
+.scroll-hint-letter { font-size:.78rem; color:#7a9fd4; text-align:center; margin-top:8px; animation:bounceAnim 1.5s ease-in-out infinite; }
 
-/* ===== MUSIC MODAL ===== */
-#music-modal {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.4); z-index: 1000;
-  align-items: center; justify-content: center;
-}
-#music-modal.open { display: flex; }
-.music-modal-box {
-  background: white; border-radius: 24px;
-  padding: 28px 24px; width: min(360px, 92vw);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-}
-.music-modal-title { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 16px; text-align: center; }
-.music-track-btn {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--bg); border-radius: 14px;
-  padding: 12px 14px; margin-bottom: 10px;
-  cursor: pointer; border: 2px solid transparent;
-  transition: border-color 0.2s; width: 100%;
-  font-family: var(--font);
-}
-.music-track-btn.playing { border-color: var(--blue-mid); }
-.music-track-btn .tn { font-size: 0.9rem; font-weight: 700; color: var(--blue-dark); text-align: left; }
-.music-track-btn .ta { font-size: 0.78rem; color: #6a8cb0; }
-.music-track-btn .ti { font-size: 1.4rem; margin-left: auto; }
-.modal-close { display: block; width: 100%; margin-top: 10px; background: none; border: none; cursor: pointer; font-family: var(--font); font-size: 0.9rem; color: #6a8cb0; font-weight: 600; }
-audio { display: none; }
+/* ===== PARTICLES ===== */
+.particle { position:fixed; pointer-events:none; z-index:500; font-size:1.2rem; animation:particlePop .8s forwards; }
+@keyframes particlePop { 0%{opacity:1;transform:scale(0) translateY(0)} 60%{opacity:1;transform:scale(1.2) translateY(-30px)} 100%{opacity:0;transform:scale(.8) translateY(-60px)} }
+
+audio { display:none; }
 </style>
 </head>
 <body>
 
-<!-- Music FAB -->
-<div id="music-fab" onclick="openMusic()">🎵</div>
+<div id="music-fab" onclick="toggleMusicPanel()">🎵</div>
 
-<!-- Music Modal -->
-<div id="music-modal">
-  <div class="music-modal-box">
-    <div class="music-modal-title">🎵 Playlist for u · Pikachu 🩷</div>
-
-    <audio id="audio1" src="Enchanted.mp3" loop></audio>
-    <audio id="audio2" src="fearless.mp3" loop></audio>
-    <audio id="audio3" src="shantyapril.mp3" loop></audio>
-
-    <button class="music-track-btn" onclick="playTrack(1)" id="tbtn1">
-      <div>
-        <div class="tn">Enchanted</div>
-        <div class="ta">Taylor Swift</div>
-      </div>
-      <span class="ti" id="ticon1">▶</span>
-    </button>
-    <button class="music-track-btn" onclick="playTrack(2)" id="tbtn2">
-      <div>
-        <div class="tn">Fearless</div>
-        <div class="ta">Taylor Swift</div>
-      </div>
-      <span class="ti" id="ticon2">▶</span>
-    </button>
-    <button class="music-track-btn" onclick="playTrack(3)" id="tbtn3">
-      <div>
-        <div class="tn">Shanty April</div>
-        <div class="ta">...</div>
-      </div>
-      <span class="ti" id="ticon3">▶</span>
-    </button>
-    <button class="modal-close" onclick="closeMusic()">tutup</button>
-  </div>
-</div>
+<!-- Hidden audios -->
+<audio id="a-fearless"  src="fearless.mp3"></audio>
+<audio id="a-enchanted" src="Enchanted.mp3"></audio>
+<audio id="a-sunshine"  src="sunshine.mp3"></audio>
+<audio id="a-rewrite"   src="rewrite.mp3"></audio>
+<audio id="a-shanty"    src="shantyapril.mp3"></audio>
+<audio id="a-18"        src="18.mp3"></audio>
 
 <!-- ==================== PAGE 1: PASSWORD ==================== -->
 <div class="page active" id="page-pw">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <line x1="53" y1="74" x2="61" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="61" y1="74" x2="53" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="89" y1="74" x2="97" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="97" y1="74" x2="89" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
-    <ellipse cx="51" cy="88" rx="3" ry="5" fill="#aee0f8"/>
-    <ellipse cx="99" cy="88" rx="3" ry="5" fill="#aee0f8"/>
-    <ellipse cx="47" cy="88" rx="6" ry="3" fill="#f9a8d4" opacity="0.6"/>
-    <ellipse cx="103" cy="88" rx="6" ry="3" fill="#f9a8d4" opacity="0.6"/>
-    <path d="M65 93 Q75 102 85 93" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <text x="25" y="55" font-size="18" fill="#888">💢</text>
-    <text x="108" y="58" font-size="14" fill="#888">💨</text>
-  </svg>
-
-  <div class="title-big" style="font-size:1.15rem;margin-bottom:6px;">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
-
-  <div class="pw-dots" id="pw-dots">
-    <div class="pw-dot" id="d0"></div>
-    <div class="pw-dot" id="d1"></div>
-    <div class="pw-dot" id="d2"></div>
-    <div class="pw-dot" id="d3"></div>
-    <div class="pw-dot" id="d4"></div>
-    <div class="pw-dot" id="d5"></div>
+  <div class="char-wrap shake-idle">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <line x1="53" y1="74" x2="61" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="61" y1="74" x2="53" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="89" y1="74" x2="97" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="97" y1="74" x2="89" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="51" cy="87" rx="3" ry="5" fill="#aee0f8"/>
+      <ellipse cx="99" cy="87" rx="3" ry="5" fill="#aee0f8"/>
+      <ellipse cx="47" cy="87" rx="6" ry="3" fill="#f9a8d4" opacity=".65"/>
+      <ellipse cx="103" cy="87" rx="6" ry="3" fill="#f9a8d4" opacity=".65"/>
+      <path d="M65 93 Q75 102 85 93" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+      <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text x="24" y="55" font-size="17">💢</text>
+      <text x="108" y="58" font-size="13">💨</text>
+    </svg>
   </div>
-
+  <div class="title-big" style="font-size:1.15rem;margin-bottom:6px;">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
+  <div class="pw-dots" id="pw-dots">
+    <div class="pw-dot" id="d0"></div><div class="pw-dot" id="d1"></div>
+    <div class="pw-dot" id="d2"></div><div class="pw-dot" id="d3"></div>
+    <div class="pw-dot" id="d4"></div><div class="pw-dot" id="d5"></div>
+  </div>
   <div class="numpad">
     <button class="num-btn" onclick="pwPress('1')">1</button>
     <button class="num-btn" onclick="pwPress('2')">2</button>
@@ -367,47 +224,50 @@ audio { display: none; }
     <button class="num-btn" onclick="pwPress('0')">0</button>
     <button class="num-btn" onclick="pwDel()">⌫</button>
   </div>
-
-  <div class="pw-clue">clue : your birthday</div>
+  <div class="pw-clue">clue : your birthday 🩷</div>
   <div class="pw-error" id="pw-error"></div>
 </div>
 
 <!-- ==================== PAGE 2: HI PRETTY ==================== -->
 <div class="page" id="page-hi">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <path d="M48 76 Q57 70 66 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M84 76 Q93 70 102 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  </svg>
-  <div style="font-size:1.1rem;font-weight:800;color:#1a2e6b;margin-bottom:4px;">Hi</div>
+  <div class="char-wrap bounce">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M48 76 Q57 70 66 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M84 76 Q93 70 102 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+      <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div style="font-size:1.1rem;font-weight:800;color:var(--blue-dark);margin-bottom:4px;">Hi</div>
   <div class="title-big blue" style="font-size:1.5rem;">hi, pretty 🤲👋</div>
   <button class="btn btn-solid" style="margin-top:10px;" onclick="goTo('page-ready')">tap disinii &lt;3</button>
 </div>
 
 <!-- ==================== PAGE 3: ARE YOU READY ==================== -->
 <div class="page" id="page-ready">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="95" rx="42" ry="45" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="112" rx="22" ry="16" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <path d="M50 80 Q59 74 68 80" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M82 80 Q91 74 100 80" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <ellipse cx="47" cy="88" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <ellipse cx="103" cy="88" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <path d="M63 90 Q75 100 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <rect x="20" y="90" width="12" height="28" rx="4" fill="#fde68a" stroke="#2a2a2a" stroke-width="2" transform="rotate(-20,26,104)"/>
-    <circle cx="22" cy="87" r="5" fill="#fde047" stroke="#2a2a2a" stroke-width="1.5"/>
-    <rect x="118" y="88" width="12" height="28" rx="4" fill="#c084fc" stroke="#2a2a2a" stroke-width="2" transform="rotate(20,124,102)"/>
-    <circle cx="128" cy="85" r="5" fill="#a855f7" stroke="#2a2a2a" stroke-width="1.5"/>
-    <text x="100" y="75" font-size="14">🩷</text>
-    <text x="110" y="90" font-size="10">💜</text>
-  </svg>
-  <div class="title-big blue" style="font-size:1.3rem;">are you readyy to open<br>thisss?</div>
-  <div class="btn-row" style="margin-top:12px;">
+  <div class="char-wrap wobble">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="95" rx="42" ry="45" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="112" rx="22" ry="16" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M50 80 Q59 74 68 80" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M82 80 Q91 74 100 80" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="47" cy="88" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <ellipse cx="103" cy="88" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <path d="M63 90 Q75 100 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+      <rect x="20" y="90" width="12" height="28" rx="4" fill="#fde68a" stroke="#2a2a2a" stroke-width="2" transform="rotate(-20,26,104)"/>
+      <circle cx="22" cy="87" r="5" fill="#fde047" stroke="#2a2a2a" stroke-width="1.5"/>
+      <rect x="118" y="88" width="12" height="28" rx="4" fill="#c084fc" stroke="#2a2a2a" stroke-width="2" transform="rotate(20,124,102)"/>
+      <circle cx="128" cy="85" r="5" fill="#a855f7" stroke="#2a2a2a" stroke-width="1.5"/>
+      <text x="100" y="75" font-size="14">🩷</text>
+      <text x="110" y="90" font-size="10">💜</text>
+    </svg>
+  </div>
+  <div class="title-big blue">are you readyy to open<br>thisss?</div>
+  <div class="btn-row" style="margin-top:14px;">
     <button class="btn btn-solid" onclick="goTo('page-bday')">yess</button>
     <button class="btn btn-outline" onclick="goTo('page-noo')">noo</button>
   </div>
@@ -415,152 +275,179 @@ audio { display: none; }
 
 <!-- ==================== PAGE 4: NOO ==================== -->
 <div class="page" id="page-noo">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <line x1="48" y1="68" x2="66" y2="74" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
-    <line x1="84" y1="74" x2="102" y2="68" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
-    <path d="M50 76 Q57 72 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M85 76 Q93 72 101 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#fca5a5" opacity="0.8"/>
-    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#fca5a5" opacity="0.8"/>
-    <path d="M62 95 Q75 88 88 95" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <text x="20" y="55" font-size="16">💢</text>
-    <text x="108" y="52" font-size="14">💢</text>
-    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  </svg>
-  <div class="title-big blue" style="font-size:1.2rem;">OH GITU SEKARANG KAMU<br>SAMA AKU? 😡</div>
+  <div class="char-wrap shake-idle">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <line x1="48" y1="68" x2="66" y2="74" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
+      <line x1="84" y1="74" x2="102" y2="68" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 76 Q57 72 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M85 76 Q93 72 101 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="47" cy="84" rx="7" ry="4" fill="#fca5a5" opacity=".8"/>
+      <ellipse cx="103" cy="84" rx="7" ry="4" fill="#fca5a5" opacity=".8"/>
+      <path d="M62 95 Q75 88 88 95" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text x="20" y="55" font-size="16">💢</text>
+      <text x="108" y="52" font-size="14">💢</text>
+      <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="title-big blue">OH GITU SEKARANG KAMU<br>SAMA AKU? 😡</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-ready')">back</button>
 </div>
 
 <!-- ==================== PAGE 5: BIRTHDAY ==================== -->
 <div class="page" id="page-bday">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M85 76 Q92 70 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <ellipse cx="53" cy="86" rx="3" ry="5" fill="#aee0f8"/>
-    <ellipse cx="97" cy="86" rx="3" ry="5" fill="#aee0f8"/>
-    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <text x="18" y="72" font-size="14">⭐</text>
-    <text x="112" y="68" font-size="12">💚</text>
-    <text x="108" y="84" font-size="10">🌟</text>
-  </svg>
+  <div class="char-wrap pulse-big">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M85 76 Q92 70 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="53" cy="85" rx="3" ry="5" fill="#aee0f8"/>
+      <ellipse cx="97" cy="85" rx="3" ry="5" fill="#aee0f8"/>
+      <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+      <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text x="16" y="72" font-size="14">⭐</text><text x="112" y="68" font-size="12">💚</text><text x="108" y="84" font-size="10">🌟</text>
+    </svg>
+  </div>
   <div class="title-big blue">Today, this pretty girl turns<br>18! happy birthday,<br>my love 🤍</div>
   <button class="btn btn-solid" style="margin-top:16px;" onclick="goTo('page-msg')">open it &lt;3</button>
 </div>
 
 <!-- ==================== PAGE 6: I HAVE SOMETHING ==================== -->
 <div class="page" id="page-msg">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <path d="M50 76 Q57 82 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M85 76 Q92 82 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <path d="M62 90 Q75 100 88 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <text x="32" y="140" font-size="16">❤️</text>
-    <text x="55" y="145" font-size="20">❤️</text>
-    <text x="82" y="142" font-size="18">❤️</text>
-    <text x="108" y="138" font-size="14">❤️</text>
-  </svg>
+  <div class="char-wrap float">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M50 76 Q57 82 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M85 76 Q92 82 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <path d="M62 90 Q75 100 88 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+      <text x="32" y="140" font-size="15">❤️</text><text x="55" y="145" font-size="19">❤️</text>
+      <text x="82" y="142" font-size="17">❤️</text><text x="108" y="138" font-size="13">❤️</text>
+    </svg>
+  </div>
   <div class="title-big blue">Happy birthday to my most<br>beautiful, loving, and caring<br>girlfriend 🤍</div>
-  <div style="font-size:1rem;font-weight:600;color:#1a2e6b;margin-top:4px;">I love youuu so muchh!!!</div>
+  <div style="font-size:1rem;font-weight:600;color:var(--blue-dark);margin-top:4px;">I love youuu so muchh!!!</div>
   <button class="btn btn-solid" style="margin-top:20px;" onclick="goTo('page-p1')">i have something for you 💌</button>
 </div>
 
-<!-- ==================== 8 FOTO PAGES ==================== -->
+<!-- ==================== 8 PHOTO PAGES ==================== -->
 <div class="page" id="page-p1">
   <div class="photo-frame"><img src="pika1.jpg" alt="foto 1"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">This was our first picture, a<br>moment I'll always remember</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p2')">klik ini &lt;3</button>
+  <div class="title-big blue" style="font-size:1.1rem;">This was our first picture, a<br>moment I'll always remember 🤍</div>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p2');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p2">
   <div class="photo-frame"><img src="pika2.jpg" alt="foto 2"></div>
   <div class="title-big blue" style="font-size:1.1rem;">I'm so grateful for every<br>moment we've shared since then</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p3')">klik ini &lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p3');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p3">
   <div class="photo-frame"><img src="pika3.jpg" alt="foto 3"></div>
   <div class="title-big blue" style="font-size:1.1rem;">Thank you for being part of my<br>days and making them feel special</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p4')">klik ini &lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p4');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p4">
-  <div class="photo-frame"><img src="pika4.jpg" alt="foto 4"></div>
+  <div class="photo-frame"><img src="pika5.jpg" alt="foto 4"></div>
   <div class="title-big blue" style="font-size:1.1rem;">I hope we keep creating<br>memories, big and small, together</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p5')">klik ini &lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p5');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p5">
-  <div class="photo-frame"><img src="pika5.jpg" alt="foto 5"></div>
+  <div class="photo-frame"><img src="pika6.jpg" alt="foto 5"></div>
   <div class="title-big blue" style="font-size:1.1rem;">you deserve the world and i'll<br>always love you</div>
-  <div class="body-text" style="text-align:center;margin-top:4px;">you never gave up on me and for that im forever grateful, thankful to have a girlfriend like you</div>
-  <button class="btn btn-solid" onclick="goTo('page-p6')">klik ini &lt;3</button>
+  <div class="body-text" style="text-align:center;margin-top:4px;">you never gave up on me and for that im forever grateful 🤍</div>
+  <button class="btn btn-solid" onclick="goTo('page-p6');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p6">
-  <div class="photo-frame"><img src="pika6.jpg" alt="foto 6"></div>
+  <div class="photo-frame"><img src="pika7.jpg" alt="foto 6"></div>
   <div class="title-big blue" style="font-size:1.1rem;">every laugh, every smile —<br>all because of you 🤍</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p7')">klik ini &lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p7');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p7">
-  <div class="photo-frame"><img src="pika7.jpg" alt="foto 7"></div>
+  <div class="photo-frame"><img src="pika9.jpg" alt="foto 7"></div>
   <div class="title-big blue" style="font-size:1.1rem;">i'm the luckiest person<br>to have you 🤍</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p8')">klik ini &lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p8');spawnHearts(event)">klik ini &lt;3</button>
 </div>
-
 <div class="page" id="page-p8">
-  <div class="photo-frame"><img src="pika8.jpg" alt="foto 8"></div>
+  <div class="photo-frame"><img src="pika10.jpg" alt="foto 8"></div>
   <div class="title-big blue" style="font-size:1.1rem;">happy birthday sayang,<br>i love you always 🩷</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-playlist')">klik ini &lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-playlist');spawnHearts(event)">klik ini &lt;3</button>
 </div>
 
-<!-- ==================== PLAYLIST PAGE ==================== -->
+<!-- ==================== SPOTIFY PLAYER PAGE ==================== -->
 <div class="page" id="page-playlist">
-  <div class="playlist-card">
-    <div class="playlist-header">
-      <div class="playlist-cover">
-        <img src="utama.jpg" alt="cover">
+  <div class="spotify-card">
+    <!-- Header -->
+    <div class="sp-header">
+      <div class="sp-cover"><img src="utama.jpg" alt="cover"></div>
+      <div class="sp-meta">
+        <div class="sp-playlist-name">for u · Pikachu 🩷</div>
+        <div class="sp-playlist-sub">by: kamu • 3 songs</div>
       </div>
-      <div class="playlist-meta">
-        <div class="playlist-title">for u · Pikachu 🩷</div>
-        <div class="playlist-by">by: kamu 🩷</div>
-      </div>
-      <div class="spotify-icon">♫</div>
+      <div class="sp-logo">🎵</div>
     </div>
-    <div class="track-list">
-      <div class="track-item">
-        <div class="track-num">1</div>
-        <div class="track-info">
-          <div class="track-name">Enchanted</div>
-          <div class="track-artist">Taylor Swift</div>
-        </div>
-        <div class="track-dur">5:53</div>
+
+    <!-- Now playing -->
+    <div class="sp-now" id="sp-now">
+      <div class="sp-now-art"><img id="sp-now-img" src="utama.jpg" alt="art"></div>
+      <div class="sp-now-info">
+        <div class="sp-now-name" id="sp-now-name">Fearless</div>
+        <div class="sp-now-artist" id="sp-now-artist">Taylor Swift</div>
       </div>
-      <div class="track-item">
-        <div class="track-num">2</div>
-        <div class="track-info">
-          <div class="track-name">Fearless</div>
-          <div class="track-artist">Taylor Swift</div>
-        </div>
-        <div class="track-dur">4:01</div>
+      <div class="sp-controls">
+        <button class="sp-ctrl-btn" onclick="spPrev()">⏮</button>
+        <button class="sp-play-btn" id="sp-play-btn" onclick="spToggle()">▶</button>
+        <button class="sp-ctrl-btn" onclick="spNext()">⏭</button>
       </div>
-      <div class="track-item">
-        <div class="track-num">3</div>
-        <div class="track-info">
-          <div class="track-name">Shanty April</div>
-          <div class="track-artist">...</div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="sp-progress">
+      <div class="sp-prog-bar" id="sp-prog-bar" onclick="spSeek(event)">
+        <div class="sp-prog-fill" id="sp-prog-fill"></div>
+      </div>
+      <div class="sp-prog-times">
+        <span id="sp-cur">0:00</span>
+        <span id="sp-dur">0:00</span>
+      </div>
+    </div>
+
+    <!-- Track list -->
+    <div id="sp-tracklist">
+      <div class="sp-track playing" id="sp-t0" onclick="spPlayTrack(0)">
+        <div class="sp-track-num">1</div>
+        <div class="sp-eq">▁▃▅</div>
+        <div class="sp-track-art"><img src="utama.jpg" alt="art"></div>
+        <div class="sp-track-info">
+          <div class="sp-tname">Fearless</div>
+          <div class="sp-tartist">Taylor Swift</div>
         </div>
-        <div class="track-dur">3:30</div>
+        <div class="sp-tdur" id="dur0">4:01</div>
+      </div>
+      <div class="sp-track" id="sp-t1" onclick="spPlayTrack(1)">
+        <div class="sp-track-num">2</div>
+        <div class="sp-eq">▁▃▅</div>
+        <div class="sp-track-art"><img src="utama.jpg" alt="art"></div>
+        <div class="sp-track-info">
+          <div class="sp-tname">Enchanted</div>
+          <div class="sp-tartist">Taylor Swift</div>
+        </div>
+        <div class="sp-tdur" id="dur1">5:53</div>
+      </div>
+      <div class="sp-track" id="sp-t2" onclick="spPlayTrack(2)">
+        <div class="sp-track-num">3</div>
+        <div class="sp-eq">▁▃▅</div>
+        <div class="sp-track-art"><img src="utama.jpg" alt="art"></div>
+        <div class="sp-track-info">
+          <div class="sp-tname">Sunshine</div>
+          <div class="sp-tartist">...</div>
+        </div>
+        <div class="sp-tdur" id="dur2">3:30</div>
       </div>
     </div>
   </div>
@@ -569,32 +456,84 @@ audio { display: none; }
 
 <!-- ==================== LAST ONE PAGE ==================== -->
 <div class="page" id="page-last">
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M85 78 Q92 74 100 78" stroke="#2a2a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <path d="M63 90 Q75 98 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <ellipse cx="83" cy="96" rx="8" ry="6" fill="#f87171" stroke="#2a2a2a" stroke-width="1.5"/>
-    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  </svg>
+  <div class="char-wrap wobble">
+    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M85 78 Q92 74 100 78" stroke="#2a2a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity=".7"/>
+      <path d="M63 90 Q75 98 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+      <ellipse cx="83" cy="96" rx="8" ry="6" fill="#f87171" stroke="#2a2a2a" stroke-width="1.5"/>
+      <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
   <div class="title-big blue" style="font-size:1.2rem;">okayy last one, i made something<br>for your birthday, read it slowly<br>okayyy</div>
   <button class="btn-circle" style="margin-top:20px;" onclick="goTo('page-final')">&lt;3</button>
 </div>
 
-<!-- ==================== FINAL LETTER PAGE ==================== -->
+<!-- ==================== FINAL SCROLLABLE LETTER ==================== -->
 <div class="page" id="page-final">
   <div class="floating-emojis" id="float-container"></div>
-  <div class="letter-box">
-    <h2>Happy birthday, my love 🤍🤍</h2>
-    <p>On your special day, I just want to remind you how grateful I am to have you in my life. Thank you for being the amazing person you are — kind, loving, and always making everything feel so warm and beautiful. I love you more than words can say, and I hope this day is as wonderful as you are. Happy birthday, pikachu 🩷</p>
+  <div class="letter-wrap">
+    <div class="letter-card" id="letter-card">
+      <div class="letter-title">🤍 Happy Birthday, Pikachu 🤍</div>
+
+      <p class="letter-para">
+        Selamat ulang tahun, sayangku. Hari ini kamu resmi bertambah satu tahun lagi, dan aku ingin kamu tahu betapa berartinya hari ini — bukan hanya karena itu hari lahirmu, tapi karena dunia ini jadi tempat yang jauh lebih indah sejak kamu ada di dalamnya.
+      </p>
+
+      <p class="letter-para">
+        I still remember the very first time I saw you. I didn't know it then, but that was the moment everything started to change for me. You walked in with that smile of yours — the one that makes everything else disappear — and I thought, <em>"wow, I'm in trouble."</em>
+      </p>
+
+      <p class="letter-para">
+        Terima kasih sudah selalu ada. Terima kasih untuk setiap pesan pagi yang kamu kirim, untuk setiap kali kamu ketawa karena hal-hal kecil yang bodoh, untuk setiap malam yang kamu temani aku meskipun kamu juga lelah. Kamu nggak pernah tahu betapa banyak hal-hal kecil itu berarti buatku.
+      </p>
+
+      <p class="letter-para">
+        You are the kind of person who makes everyone around you feel safe and loved. And I — I am the luckiest person in the world because I get to be the one closest to you. I get to see the real you, the one behind all the jokes and the laughs, and honestly? I love that version of you the most.
+      </p>
+
+      <p class="letter-para">
+        Ada hari-hari yang berat, aku tahu. Tapi aku juga tahu satu hal yang pasti: aku nggak mau ngelewatin hari-hari itu tanpa kamu. Kamu bukan cuma pacar aku — kamu adalah teman terbaik aku, rumah yang aku selalu pengen pulang ke sana.
+      </p>
+
+      <p class="letter-para">
+        On your birthday, I wish you all the happiness the universe can possibly hold. I wish you days full of sunshine and nights full of peace. I wish that every dream you've been quietly holding onto starts to come true, one by one.
+      </p>
+
+      <p class="letter-para">
+        Dan aku berjanji — aku akan terus ada. Di hari-hari yang biasa, di momen-momen yang nggak sempurna, di setiap detik yang kadang rasanya nggak berarti. Aku di sini. Selalu.
+      </p>
+
+      <p class="letter-para">
+        I love you more than Fearless, more than Enchanted, more than any Taylor Swift song could ever describe. You are my favorite story — and I hope we're only on the first chapter.
+      </p>
+
+      <p class="letter-para">
+        Selamat ulang tahun, Pikachu. Semoga panjang umur, sehat selalu, dan selalu bahagia. Kamu layak mendapatkan semua yang terbaik di dunia ini — dan aku akan terus berusaha jadi salah satu dari hal terbaik itu untukmu 🩷
+      </p>
+
+      <div class="letter-sign">— dengan cinta yang nggak ada habisnya, dari aku yang selalu menyayangimu 🤍</div>
+    </div>
+    <div class="scroll-hint-letter">↓ scroll untuk baca semua ↓</div>
   </div>
-  <button class="btn btn-solid" style="position:relative;z-index:2;" onclick="openMusic()">🎵 play our playlist</button>
 </div>
 
 <script>
+// ===== TRACKS CONFIG =====
+const TRACKS = [
+  { id:'a-fearless',  name:'Fearless',  artist:'Taylor Swift' },
+  { id:'a-enchanted', name:'Enchanted', artist:'Taylor Swift' },
+  { id:'a-sunshine',  name:'Sunshine',  artist:'...' },
+];
+let spIdx = 0;
+let spPlaying = false;
+
+function getAudio(i) { return document.getElementById(TRACKS[i].id); }
+
 // ===== PAGE NAV =====
 function goTo(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -604,9 +543,8 @@ function goTo(id) {
 }
 
 // ===== PASSWORD =====
-const CORRECT = '021125';
+const CORRECT = '090806';
 let pwVal = '';
-
 function pwPress(n) {
   if (pwVal.length >= 6) return;
   pwVal += n;
@@ -615,8 +553,10 @@ function pwPress(n) {
     setTimeout(() => {
       if (pwVal === CORRECT) {
         goTo('page-hi');
+        // Auto play first track
+        setTimeout(() => spPlayTrack(0), 600);
       } else {
-        document.getElementById('pw-error').textContent = 'salah password! coba lagi ya~ 🥺';
+        document.getElementById('pw-error').textContent = 'salah password! coba lagi ya 🥺';
         document.getElementById('pw-dots').classList.add('shake');
         setTimeout(() => {
           document.getElementById('pw-dots').classList.remove('shake');
@@ -627,64 +567,142 @@ function pwPress(n) {
     }, 200);
   }
 }
-
-function pwDel() {
-  pwVal = pwVal.slice(0,-1);
-  updateDots();
+function pwDel() { pwVal = pwVal.slice(0,-1); updateDots(); }
+function updateDots() {
+  for (let i=0;i<6;i++) document.getElementById('d'+i).classList.toggle('filled', i < pwVal.length);
 }
 
-function updateDots() {
-  for (let i = 0; i < 6; i++) {
-    document.getElementById('d'+i).classList.toggle('filled', i < pwVal.length);
+// ===== SPOTIFY PLAYER =====
+function spPlayTrack(i) {
+  // Stop previous
+  if (spPlaying) {
+    getAudio(spIdx).pause();
+    getAudio(spIdx).currentTime = 0;
+  }
+  spIdx = i;
+  const audio = getAudio(i);
+  audio.play().catch(()=>{});
+  spPlaying = true;
+  updateSpUI();
+  document.getElementById('music-fab').classList.add('spin');
+}
+
+function spToggle() {
+  const audio = getAudio(spIdx);
+  if (spPlaying) {
+    audio.pause(); spPlaying = false;
+    document.getElementById('sp-play-btn').textContent = '▶';
+    document.getElementById('music-fab').classList.remove('spin');
+  } else {
+    audio.play().catch(()=>{});
+    spPlaying = true;
+    document.getElementById('sp-play-btn').textContent = '⏸';
+    document.getElementById('music-fab').classList.add('spin');
   }
 }
 
-// ===== MUSIC =====
-let currentTrack = 0;
+function spNext() {
+  spPlayTrack((spIdx + 1) % TRACKS.length);
+}
+function spPrev() {
+  const audio = getAudio(spIdx);
+  if (audio.currentTime > 3) { audio.currentTime = 0; return; }
+  spPlayTrack((spIdx - 1 + TRACKS.length) % TRACKS.length);
+}
 
-function openMusic() {
-  document.getElementById('music-modal').classList.add('open');
+function updateSpUI() {
+  const t = TRACKS[spIdx];
+  document.getElementById('sp-now-name').textContent = t.name;
+  document.getElementById('sp-now-artist').textContent = t.artist;
+  document.getElementById('sp-play-btn').textContent = '⏸';
+  // Track list highlight
+  for (let i=0;i<TRACKS.length;i++) {
+    document.getElementById('sp-t'+i).classList.toggle('playing', i===spIdx);
+  }
 }
-function closeMusic() {
-  document.getElementById('music-modal').classList.remove('open');
-}
-document.getElementById('music-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeMusic();
+
+// Progress update
+setInterval(() => {
+  if (!spPlaying) return;
+  const audio = getAudio(spIdx);
+  if (audio.duration) {
+    const pct = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('sp-prog-fill').style.width = pct + '%';
+    document.getElementById('sp-cur').textContent = fmt(audio.currentTime);
+    document.getElementById('sp-dur').textContent = fmt(audio.duration);
+  }
+}, 500);
+
+// Auto next
+TRACKS.forEach((t,i) => {
+  getAudio(i).addEventListener('ended', () => spNext());
 });
 
-function playTrack(n) {
-  if (currentTrack > 0) {
-    document.getElementById('audio'+currentTrack).pause();
-    document.getElementById('audio'+currentTrack).currentTime = 0;
-    document.getElementById('ticon'+currentTrack).textContent = '▶';
-    document.getElementById('tbtn'+currentTrack).classList.remove('playing');
-  }
-  if (currentTrack === n) { currentTrack = 0; return; }
-  const audio = document.getElementById('audio'+n);
-  audio.play();
-  currentTrack = n;
-  document.getElementById('ticon'+n).textContent = '⏸';
-  document.getElementById('tbtn'+n).classList.add('playing');
+function spSeek(e) {
+  const bar = document.getElementById('sp-prog-bar');
+  const rect = bar.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  const audio = getAudio(spIdx);
+  if (audio.duration) audio.currentTime = pct * audio.duration;
 }
 
-// ===== FLOATING EMOJIS =====
+function fmt(s) {
+  const m = Math.floor(s/60);
+  return m + ':' + Math.floor(s%60).toString().padStart(2,'0');
+}
+
+// Music FAB toggle — show/hide player panel
+function toggleMusicPanel() {
+  const pg = document.getElementById('page-playlist');
+  const cur = document.querySelector('.page.active');
+  if (cur && cur.id === 'page-playlist') return;
+  // just toggle play/pause from anywhere
+  spToggle();
+}
+
+// ===== HEART PARTICLES on button click =====
+function spawnHearts(e) {
+  const emojis = ['🩷','💙','⭐','✨','💜'];
+  for (let i=0;i<6;i++) {
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
+    el.style.top = (e.clientY - 10) + 'px';
+    el.style.animationDelay = (i*0.07)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1000);
+  }
+}
+
+// ===== FLOATING EMOJIS final page =====
 function startFloating() {
   const c = document.getElementById('float-container');
   c.innerHTML = '';
-  const items = ['💙','⭐','🌟','🩷','🩵','🩷','🩵','💛','💙','❤️‍🔥'];
+  const items = ['💙','⭐','🌟','💙','⭐','✨','💛','🩷','💜','⭐'];
+  let running = true;
   function spawn() {
+    if (!running) return;
     const el = document.createElement('div');
     el.className = 'float-em';
     el.textContent = items[Math.floor(Math.random()*items.length)];
     el.style.left = (Math.random()*95)+'vw';
-    el.style.animationDuration = (4+Math.random()*5)+'s';
-    el.style.fontSize = (1.2+Math.random()*1.2)+'rem';
+    const dur = 4 + Math.random()*5;
+    el.style.animationDuration = dur+'s';
+    el.style.fontSize = (1.1+Math.random()*1.3)+'rem';
     c.appendChild(el);
-    setTimeout(()=>el.remove(), 10000);
+    setTimeout(()=>el.remove(), dur*1000+200);
   }
-  for (let i=0;i<18;i++) setTimeout(spawn, i*300);
-  setInterval(spawn, 600);
+  for(let i=0;i<20;i++) setTimeout(spawn,i*250);
+  const iv = setInterval(spawn, 550);
+  // Stop spawning if user leaves page
+  const obs = new MutationObserver(()=>{
+    if (!document.getElementById('page-final').classList.contains('active')) {
+      running = false; clearInterval(iv); obs.disconnect();
+    }
+  });
+  obs.observe(document.body, {attributes:true, subtree:true, attributeFilter:['class']});
 }
 </script>
 </body>
-  </html>
+</html>
