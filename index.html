@@ -1,1 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!🌸❤️</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: #ffffff;
+            color: #1e3a8a;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            user-select: none;
+        }
 
+        /* CONTAINER UTAMA HP MOCKUP */
+        .phone-area {
+            position: relative;
+            width: 100%;
+            max-width: 415px;
+            height: 100vh;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 24px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* ELEMEN GLOBAL: KANTONG AUDIO BULAT DI POJOK ATAS */
+        .global-audio-btn {
+            position: absolute;
+            top: 25px; right: 25px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid #1e3a8a;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 999;
+            background: #ffffff;
+            font-size: 16px;
+        }
+        .global-audio-btn.playing {
+            animation: spin 3s linear infinite;
+        }
+
+        /* SCREEN 1: KEYPAD PASSWORD */
+        #scr-password { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .mascot-avatar { font-size: 85px; margin-bottom: 15px; animation: bounce 2s infinite alternate; }
+        .scr-title { font-size: 16px; font-weight: 600; color: #1e3a8a; text-align: center; margin-bottom: 20px; }
+        
+        .dots-container { display: flex; gap: 12px; margin-bottom: 35px; }
+        .dot { width: 14px; height: 14px; border: 2px solid #1e3a8a; border-radius: 50%; transition: background 0.2s; }
+        .dot.active { background: #1e3a8a; }
+
+        .keypad-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 25px;
+            width: 100%; max-width: 290px;
+        }
+        .key-btn {
+            background: #f8fafc; border: none; border-radius: 16px;
+            height: 60px; font-size: 24px; font-weight: 700; color: #1e3a8a;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: background 0.1s;
+            box-shadow: 0 4px 10px rgba(30,58,138,0.04);
+        }
+        .key-btn:active { background: #e2e8f0; }
+        .clue-text { font-size: 12px; color: #94a3b8; margin-top: 35px; font-style: italic; }
+
+        /* SCREEN 2: GREETING & CONFIRMATION */
+        #scr-confirm { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; text-align: center; }
+        .btn-action {
+            background: #1e3a8a; color: #ffffff; border: none; padding: 12px 45px;
+            font-size: 14px; font-weight: 600; border-radius: 25px; cursor: pointer;
+            margin-top: 20px; box-shadow: 0 5px 15px rgba(30,58,138,0.2);
+        }
+        .choice-row { display: flex; gap: 15px; margin-top: 25px; width: 100%; justify-content: center; }
+        .btn-yes { background: #1e3a8a; color: white; border: none; padding: 10px 35px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+        .btn-no { background: #f1f5f9; color: #64748b; border: none; padding: 10px 35px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+
+        /* SCREEN 3: MUSIC LIST (SPOTIFY STYLE) */
+        #scr-spotify { display: none; flex-direction: column; width: 100%; }
+        .spot-card {
+            background: #6b21a8; width: 100%; border-radius: 24px; padding: 25px;
+            color: #ffffff; position: relative; margin-top: 20px;
+            box-shadow: 0 15px 35px rgba(107,33,168,0.25);
+        }
+        .spot-header { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .spot-logo { position: absolute; top: 20px; right: 25px; font-size: 24px; opacity: 0.9; }
+        .spot-cover { width: 110px; height: 110px; background: #fff; border-radius: 20px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; font-size: 55px; }
+        .spot-controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin: 20px 0; font-size: 22px; }
+        .spot-play-trigger { font-size: 40px; cursor: pointer; }
+        
+        .track-list { display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
+        .track-item { display: flex; justify-content: space-between; align-items: center; font-size: 13px; opacity: 0.7; padding: 4px 0; }
+        .track-item.active { opacity: 1; font-weight: bold; color: #f472b6; }
+        .track-info { display: flex; gap: 12px; }
+
+        /* SCREEN 4: SURAT PANJANG & HUJAN BINTANG LAMBING CINTA */
+        #scr-letter { display: none; flex-direction: column; width: 100%; position: relative; }
+        .floating-elements { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+        .heart-star-particle { position: absolute; animation: fallDown var(--d) linear infinite; font-size: var(--s); opacity: 0.8; }
+        
+        /* FOTO UTAMA JALUR KOSONG (UNTUK DIISI NANTI) */
+        .photo-main-box {
+            width: 100%; height: 260px; border-radius: 20px;
+            overflow: hidden; position: relative; margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 5;
+            background: #f1f5f9;
+        }
+        .photo-main-box img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .letter-scroll-wrap {
+            width: 100%; background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px); border-radius: 20px; padding: 25px;
+            box-shadow: 0 10px 30px rgba(30,58,138,0.05); z-index: 5;
+            max-height: 380px; overflow-y: auto; border: 1px solid rgba(30,58,138,0.08);
+        }
+        .typed-paragraph { font-size: 15px; line-height: 1.7; color: #1e3a8a; text-align: left; margin-bottom: 15px; font-weight: 500; }
+
+        /* KEYFRAMES ANIMASI */
+        @keyframes bounce { from { transform: translateY(0) scale(1); } to { transform: translateY(-12px) scale(1.02); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fallDown {
+            0% { transform: translateY(-5vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="main-music" src="fearless.mp3" loop></audio>
+
+    <div class="phone-area">
+        
+        <div class="global-audio-btn" id="global-audio" onclick="toggleAudioTekan()">🎵</div>
+
+        <div id="scr-password">
+            <div class="mascot-avatar">🐱</div>
+            <div class="scr-title">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
+            
+            <div class="dots-container" id="dots-wrap">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+
+            <div class="keypad-grid">
+                <button class="key-btn" onclick="tekanAngka('1')">1</button>
+                <button class="key-btn" onclick="tekanAngka('2')">2</button>
+                <button class="key-btn" onclick="tekanAngka('3')">3</button>
+                <button class="key-btn" onclick="tekanAngka('4')">4</button>
+                <button class="key-btn" onclick="tekanAngka('5')">5</button>
+                <button class="key-btn" onclick="tekanAngka('6')">6</button>
+                <button class="key-btn" onclick="tekanAngka('7')">7</button>
+                <button class="key-btn" onclick="tekanAngka('8')">8</button>
+                <button class="key-btn" onclick="tekanAngka('9')">9</button>
+                <div style="visibility: hidden;"></div>
+                <button class="key-btn" onclick="tekanAngka('0')">0</button>
+                <button class="key-btn" onclick="hapusAngka()">✉️</button>
+            </div>
+            <div class="clue-text">clue : your birthday</div>
+        </div>
+
+        <div id="scr-confirm">
+            <div id="confirm-box-content">
+                <div class="mascot-avatar">👋</div>
+                <div class="scr-title" style="font-size: 22px;">hi, pretty 🫶🏼🏼</div>
+                <button class="btn-action" onclick="pindahKeSesiSiap()">tap disini &lt;3</button>
+            </div>
+        </div>
+
+        <div id="scr-spotify">
+            <div class="mascot-avatar" style="text-align: center; font-size: 65px;">✨</div>
+            <div class="spot-card">
+                <div class="spot-logo">🎵</div>
+                <div class="spot-header">
+                    <div class="spot-cover">🐰</div>
+                    <h3 style="font-size: 18px; font-weight:700;">for u · Lovee</h3>
+                    <p style="font-size: 12px; opacity:0.7; margin-top:2px;">Playlist Khusus Pikachu</p>
+                </div>
+                <div class="spot-controls">
+                    <span>⏮️</span>
+                    <span class="spot-play-trigger" id="spot-play-icon" onclick="toggleAudioTekan()">⏸️</span>
+                    <span>⏭️</span>
+                </div>
+                <div class="track-list">
+                    <div class="track-item active">
+                        <div class="track-info"><span>1</span><div><strong>Fearless (Taylor's Version)</strong><br><span style="font-size:11px; opacity:0.6;">Taylor Swift</span></div></div>
+                        <span>04:01</span>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-info"><span>2</span><div><strong>Enchanted (Taylor's Version)</strong><br><span style="font-size:11px; opacity:0.6;">Taylor Swift</span></div></div>
+                        <span>05:52</span>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-item"><span>3</span><div><strong>Shanty April</strong><br><span style="font-size:11px; opacity:0.6;">Local Track</span></div></div>
+                        <span>03:25</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-action" style="margin: 30px auto 0; display:block;" onclick="bukaSuratAkhir()">Lanjut ➔</button>
+        </div>
+
+        <div id="scr-letter">
+            <div class="floating-elements" id="rain-zone"></div>
+            
+            <h2 style="text-align: center; color: #1e3a8a; font-size: 20px; font-weight: 700; margin-bottom: 20px;">
+                Happy birthday, my love 🤍🤍
+            </h2>
+
+            <div class="photo-main-box">
+                <img src="utama.jpg" alt="Silakan upload file 'utama.jpg' ke GitHub Anda" onerror="this.style.display='none';">
+            </div>
+
+            <div class="letter-scroll-wrap">
+                <div class="typed-paragraph" id="p1"></div>
+                <div class="typed-paragraph" id="p2"></div>
+                <div class="typed-paragraph" id="p3"></div>
+                <button class="btn-action" style="width:100%; margin-top:15px; display:none;" id="btn-reset" onclick="lokasiReset()">Kembali Ke Awal</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Password diubah menjadi 9 Agustus 2006 (Format: DDMMYY)
+        const KODE_BENAR = "090806"; 
+        let inputSkrg = "";
+        const audioNode = document.getElementById('main-music');
+
+        function tekanAngka(num) {
+            if (inputSkrg.length < 6) {
+                inputSkrg += num;
+                updateVisualDot();
+                
+                if (inputSkrg.length === 6) {
+                    setTimeout(() => {
+                        if (inputSkrg === KODE_BENAR) {
+                            audioNode.play().catch(r => console.log("Audio on"));
+                            document.getElementById('global-audio').classList.add('playing');
+                            document.getElementById('scr-password').style.display = 'none';
+                            document.getElementById('scr-confirm').style.display = 'flex';
+                        } else {
+                            alert("Password salah sayang! Coba diingat lagi tanggal lahir kamu 🤭");
+                            inputSkrg = "";
+                            updateVisualDot();
+                        }
+                    }, 250);
+                }
+            }
+        }
+
+        function hapusAngka() {
+            if (inputSkrg.length > 0) {
+                inputSkrg = inputSkrg.slice(0, -1);
+                updateVisualDot();
+            }
+        }
+
+        function updateVisualDot() {
+            const dots = document.querySelectorAll('#dots-wrap .dot');
+            dots.forEach((d, idx) => {
+                if (idx < inputSkrg.length) d.classList.add('active');
+                else d.classList.remove('active');
+            });
+        }
+
+        function toggleAudioTekan() {
+            const gBtn = document.getElementById('global-audio');
+            const sBtn = document.getElementById('spot-play-icon');
+            if (audioNode.paused) {
+                audioNode.play();
+                gBtn.classList.add('playing');
+                if(sBtn) sBtn.innerText = "⏸️";
+            } else {
+                audioNode.pause();
+                gBtn.classList.remove('playing');
+                if(sBtn) sBtn.innerText = "▶️";
+            }
+        }
+
+        function pindahKeSesiSiap() {
+            const wadah = document.getElementById('confirm-box-content');
+            wadah.innerHTML = `
+                <div class="mascot-avatar">🦄</div>
+                <div class="scr-title">are you readyy to open thiss?</div>
+                <div class="choice-row">
+                    <button class="btn-yes" onclick="masukKeSpotify()">yess</button>
+                    <button class="btn-no" onclick="pemicuMarah()">noo</button>
+                </div>
+            `;
+        }
+
+        function pemicuMarah() {
+            const wadah = document.getElementById('confirm-box-content');
+            wadah.innerHTML = `
+                <div class="mascot-avatar">😡</div>
+                <div class="scr-title" style="color: #dc2626;">OH GITU SEKARANG KAMU SAMA AKU?</div>
+                <button class="btn-yes" style="background:#dc2626;" onclick="pindahKeSesiSiap()">back</button>
+            `;
+        }
+
+        function masukKeSpotify() {
+            document.getElementById('scr-confirm').style.display = 'none';
+            document.getElementById('scr-spotify').style.display = 'flex';
+        }
+
+        function bukaSuratAkhir() {
+            document.getElementById('scr-spotify').style.display = 'none';
+            document.getElementById('scr-letter').style.display = 'flex';
+            mulaiHujanElemen();
+            
+            // Efek teks mengetik otomatis baris demi baris
+            ketikPesan("On your special day, I just want to remind you how grateful I am to have you in my life. Thank you for being the amazing person you are—kind, loving, and always making everything feel a little warmer just by being around.", "p1", () => {
+                ketikPesan("I hope this new year of your life brings you happiness, peace, and all the good things you've been wishing for. May every step you take feel lighter, and may you always be surrounded by love and people who truly care about you. You deserve so much more than you realize. 🌟", "p2", () => {
+                    ketikPesan("I'm thankful I get to celebrate you, today and hopefully many days after this. I look forward to creating more memories with you, growing together, and loving you in all the simple ways that matter most. Happy birthday! 🎂❤️", "p3", () => {
+                        document.getElementById('btn-reset').style.display = "block";
+                    });
+                });
+            });
+        }
+
+        function ketikPesan(teks, elemenId, callback) {
+            let i = 0;
+            const target = document.getElementById(elemenId);
+            function jalankan() {
+                if (i < teks.length) {
+                    target.innerHTML += teks.charAt(i);
+                    i++;
+                    setTimeout(jalankan, 35);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            jalankan();
+        }
+
+        function mulaiHujanElemen() {
+            const zona = document.getElementById('rain-zone');
+            const kadoPartikel = ['💙', '✨', '💛', '🤍', '🌙'];
+            setInterval(() => {
+                const p = document.createElement('div');
+                p.className = 'heart-star-particle';
+                p.innerText = kadoPartikel[Math.floor(Math.random() * kadoPartikel.length)];
+                p.style.setProperty('--d', (Math.random() * 4 + 3) + 's');
+                p.style.setProperty('--s', (Math.random() * 15 + 12) + 'px');
+                p.style.left = Math.random() * 100 + '%';
+                zona.appendChild(p);
+                setTimeout(() => p.remove(), 6000);
+            }, 350);
+        }
+
+        function lokasiReset() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
