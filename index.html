@@ -10,15 +10,11 @@
 
 :root {
   --bg: #e8f0fe;
-  --bg2: #dce8fd;
   --blue-dark: #1e3a8a;
   --blue-mid: #2d5be3;
   --blue-btn: #1e3a8a;
   --blue-btn2: #2d4fd6;
   --text-dark: #1a2e6b;
-  --text-mid: #2d5be3;
-  --card-bg: #f0f4ff;
-  --white: #ffffff;
   --font: 'Nunito', sans-serif;
 }
 
@@ -30,7 +26,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* ===== MUSIC BTN (always visible top-right) ===== */
+/* ===== MUSIC FAB ===== */
 #music-fab {
   position: fixed;
   top: 18px; right: 18px;
@@ -62,19 +58,7 @@ html, body {
 }
 .page.active { display: flex; }
 
-/* ===== STICKER / CHARACTER ===== */
-.sticker {
-  width: 160px;
-  height: 160px;
-  margin-bottom: 20px;
-  object-fit: contain;
-}
-
-/* SVG Wobbuffet-like characters */
-.char-svg {
-  width: 150px; height: 150px;
-  margin-bottom: 20px;
-}
+.char-svg { width: 150px; height: 150px; margin-bottom: 20px; }
 
 /* ===== TYPOGRAPHY ===== */
 .title-big {
@@ -85,12 +69,6 @@ html, body {
   margin-bottom: 14px;
 }
 .title-big.blue { color: var(--blue-mid); }
-.subtitle {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 6px;
-}
 .body-text {
   font-size: 0.95rem;
   font-weight: 400;
@@ -111,7 +89,6 @@ html, body {
   cursor: pointer;
   border: none;
   transition: transform 0.15s, box-shadow 0.15s;
-  text-decoration: none;
 }
 .btn:active { transform: scale(0.96); }
 .btn-solid {
@@ -125,8 +102,7 @@ html, body {
   color: var(--blue-dark);
   border: 2px solid var(--blue-dark);
 }
-.btn-outline:hover { background: rgba(30,58,138,0.06); }
-.btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-row { display: flex; gap: 14px; justify-content: center; }
 
 .btn-circle {
   width: 60px; height: 60px;
@@ -142,9 +118,8 @@ html, body {
 }
 .btn-circle:hover { transform: scale(1.08); }
 
-/* ===== NUMPAD PAGE ===== */
+/* ===== PASSWORD PAGE ===== */
 #page-pw {
-  gap: 0;
   justify-content: flex-start;
   padding-top: 60px;
 }
@@ -178,27 +153,17 @@ html, body {
   color: var(--blue-dark);
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(30,58,138,0.1);
-  transition: transform 0.1s, box-shadow 0.1s;
+  transition: transform 0.1s;
 }
-.num-btn:active { transform: scale(0.93); box-shadow: none; }
-.num-btn.del { font-size: 1.2rem; }
+.num-btn:active { transform: scale(0.93); }
 .num-btn.empty { background: transparent; box-shadow: none; pointer-events: none; }
+.pw-clue { margin-top: 20px; font-size: 0.85rem; color: var(--blue-mid); font-weight: 600; }
+.pw-error { margin-top: 8px; font-size: 0.82rem; color: #e53e3e; min-height: 18px; font-weight: 700; }
 
-.pw-clue {
-  margin-top: 20px;
-  font-size: 0.85rem;
-  color: var(--blue-mid);
-  font-weight: 600;
-}
-.pw-error {
-  margin-top: 8px;
-  font-size: 0.82rem;
-  color: #e53e3e;
-  min-height: 18px;
-  font-weight: 700;
-}
 @keyframes shake {
-  0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-8px)}
+  40%,80%{transform:translateX(8px)}
 }
 .shake { animation: shake 0.4s; }
 
@@ -209,25 +174,13 @@ html, body {
   overflow: hidden;
   margin-bottom: 20px;
   box-shadow: 0 4px 20px rgba(30,58,138,0.12);
-  background: #cdd9f5;
   aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center;
 }
 .photo-frame img, .photo-frame video {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
 }
-.photo-frame .photo-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  color: #7a9fd4;
-  font-size: 0.85rem;
-  gap: 8px;
-  background: linear-gradient(135deg, #dce8fd, #c5d8f9);
-}
-.photo-frame .photo-placeholder span { font-size: 2.5rem; }
 
 /* ===== PLAYLIST CARD ===== */
 .playlist-card {
@@ -245,10 +198,7 @@ html, body {
 .playlist-cover {
   width: 80px; height: 80px;
   border-radius: 12px;
-  background: #f4b8c8;
   overflow: hidden; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.5rem;
 }
 .playlist-cover img { width: 100%; height: 100%; object-fit: cover; }
 .playlist-meta { flex: 1; }
@@ -256,13 +206,13 @@ html, body {
 .playlist-by { font-size: 0.8rem; color: #c9aed4; }
 .spotify-icon {
   width: 28px; height: 28px;
-  margin-left: auto; flex-shrink: 0;
   background: white; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 900; color: #1DB954;
+  font-size: 0.75rem; font-weight: 900; color: #1DB954;
+  flex-shrink: 0;
 }
 
-.track-list { display: flex; flex-direction: column; gap: 0; }
+.track-list { display: flex; flex-direction: column; }
 .track-item {
   display: flex; align-items: center; gap: 12px;
   padding: 10px 0;
@@ -275,21 +225,13 @@ html, body {
 .track-artist { font-size: 0.75rem; color: #c9aed4; margin-top: 2px; }
 .track-dur { font-size: 0.82rem; color: #c9aed4; font-weight: 600; }
 
-/* ===== FINAL LETTER PAGE ===== */
-#page-final {
-  justify-content: flex-start;
-  padding-top: 80px;
-}
-.floating-emojis {
-  position: fixed; inset: 0;
-  pointer-events: none; z-index: 0;
-  overflow: hidden;
-}
+/* ===== FINAL PAGE ===== */
+#page-final { justify-content: flex-start; padding-top: 80px; }
+.floating-emojis { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .float-em {
   position: absolute;
   animation: floatEm linear infinite;
-  font-size: 1.6rem;
-  opacity: 0;
+  font-size: 1.6rem; opacity: 0;
 }
 @keyframes floatEm {
   0%   { transform: translateY(100vh) rotate(-15deg); opacity: 0; }
@@ -298,7 +240,7 @@ html, body {
   100% { transform: translateY(-80px) rotate(15deg); opacity: 0; }
 }
 .letter-box {
-  background: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.6);
   border-radius: 18px;
   padding: 28px 24px;
   max-width: 360px;
@@ -307,63 +249,38 @@ html, body {
   box-shadow: 0 4px 20px rgba(30,58,138,0.1);
   margin-bottom: 20px;
 }
-.letter-box h2 {
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--blue-dark);
-  margin-bottom: 14px;
-}
+.letter-box h2 { font-size: 1.2rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 14px; }
 .letter-box p {
-  font-size: 0.92rem;
-  color: #2a4a7a;
-  line-height: 1.75;
-  border-left: 3px solid var(--blue-mid);
-  padding-left: 12px;
+  font-size: 0.92rem; color: #2a4a7a; line-height: 1.75;
+  border-left: 3px solid var(--blue-mid); padding-left: 12px;
 }
 
 /* ===== MUSIC MODAL ===== */
 #music-modal {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 1000;
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4); z-index: 1000;
   align-items: center; justify-content: center;
 }
 #music-modal.open { display: flex; }
 .music-modal-box {
-  background: white;
-  border-radius: 24px;
-  padding: 28px 24px;
-  width: min(360px, 92vw);
+  background: white; border-radius: 24px;
+  padding: 28px 24px; width: min(360px, 92vw);
   box-shadow: 0 10px 40px rgba(0,0,0,0.25);
 }
-.music-modal-title {
-  font-size: 1rem; font-weight: 800;
-  color: var(--blue-dark);
-  margin-bottom: 16px; text-align: center;
-}
+.music-modal-title { font-size: 1rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 16px; text-align: center; }
 .music-track-btn {
   display: flex; align-items: center; gap: 12px;
-  background: var(--bg);
-  border-radius: 14px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: border-color 0.2s;
-  width: 100%;
+  background: var(--bg); border-radius: 14px;
+  padding: 12px 14px; margin-bottom: 10px;
+  cursor: pointer; border: 2px solid transparent;
+  transition: border-color 0.2s; width: 100%;
   font-family: var(--font);
 }
 .music-track-btn.playing { border-color: var(--blue-mid); }
 .music-track-btn .tn { font-size: 0.9rem; font-weight: 700; color: var(--blue-dark); text-align: left; }
 .music-track-btn .ta { font-size: 0.78rem; color: #6a8cb0; }
 .music-track-btn .ti { font-size: 1.4rem; margin-left: auto; }
-.modal-close {
-  display: block; width: 100%; margin-top: 10px;
-  background: none; border: none; cursor: pointer;
-  font-family: var(--font); font-size: 0.9rem;
-  color: #6a8cb0; font-weight: 600;
-}
+.modal-close { display: block; width: 100%; margin-top: 10px; background: none; border: none; cursor: pointer; font-family: var(--font); font-size: 0.9rem; color: #6a8cb0; font-weight: 600; }
 audio { display: none; }
 </style>
 </head>
@@ -377,29 +294,28 @@ audio { display: none; }
   <div class="music-modal-box">
     <div class="music-modal-title">🎵 Playlist for u · Pikachu 🩷</div>
 
-    <!-- GANTI src audio di sini -->
-    <audio id="audio1" src="GANTI_URL_LAGU_1.mp3" loop></audio>
-    <audio id="audio2" src="GANTI_URL_LAGU_2.mp3" loop></audio>
-    <audio id="audio3" src="GANTI_URL_LAGU_3.mp3" loop></audio>
+    <audio id="audio1" src="Enchanted.mp3" loop></audio>
+    <audio id="audio2" src="fearless.mp3" loop></audio>
+    <audio id="audio3" src="shantyapril.mp3" loop></audio>
 
     <button class="music-track-btn" onclick="playTrack(1)" id="tbtn1">
       <div>
-        <div class="tn">Nama Lagu 1</div>
-        <div class="ta">Nama Artis 1</div>
+        <div class="tn">Enchanted</div>
+        <div class="ta">Taylor Swift</div>
       </div>
       <span class="ti" id="ticon1">▶</span>
     </button>
     <button class="music-track-btn" onclick="playTrack(2)" id="tbtn2">
       <div>
-        <div class="tn">Nama Lagu 2</div>
-        <div class="ta">Nama Artis 2</div>
+        <div class="tn">Fearless</div>
+        <div class="ta">Taylor Swift</div>
       </div>
       <span class="ti" id="ticon2">▶</span>
     </button>
     <button class="music-track-btn" onclick="playTrack(3)" id="tbtn3">
       <div>
-        <div class="tn">Nama Lagu 3</div>
-        <div class="ta">Nama Artis 3</div>
+        <div class="tn">Shanty April</div>
+        <div class="ta">...</div>
       </div>
       <span class="ti" id="ticon3">▶</span>
     </button>
@@ -409,36 +325,24 @@ audio { display: none; }
 
 <!-- ==================== PAGE 1: PASSWORD ==================== -->
 <div class="page active" id="page-pw">
-  <!-- Crying wobbuffet SVG -->
   <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <!-- Body -->
     <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <!-- Belly -->
     <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <!-- Face - crying -->
-    <ellipse cx="57" cy="78" rx="11" ry="10" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <ellipse cx="93" cy="78" rx="11" ry="10" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <!-- X eyes crying -->
     <line x1="53" y1="74" x2="61" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="61" y1="74" x2="53" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="89" y1="74" x2="97" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="97" y1="74" x2="89" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
-    <!-- Tears -->
     <ellipse cx="51" cy="88" rx="3" ry="5" fill="#aee0f8"/>
     <ellipse cx="99" cy="88" rx="3" ry="5" fill="#aee0f8"/>
-    <!-- Blush -->
     <ellipse cx="47" cy="88" rx="6" ry="3" fill="#f9a8d4" opacity="0.6"/>
     <ellipse cx="103" cy="88" rx="6" ry="3" fill="#f9a8d4" opacity="0.6"/>
-    <!-- Mouth open crying -->
     <path d="M65 93 Q75 102 85 93" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <!-- Tail -->
     <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <!-- Anger sparks -->
     <text x="25" y="55" font-size="18" fill="#888">💢</text>
     <text x="108" y="58" font-size="14" fill="#888">💨</text>
   </svg>
 
-  <div class="title-big" style="font-size:1.2rem; margin-bottom:6px;">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
+  <div class="title-big" style="font-size:1.15rem;margin-bottom:6px;">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
 
   <div class="pw-dots" id="pw-dots">
     <div class="pw-dot" id="d0"></div>
@@ -461,7 +365,7 @@ audio { display: none; }
     <button class="num-btn" onclick="pwPress('9')">9</button>
     <button class="num-btn empty"></button>
     <button class="num-btn" onclick="pwPress('0')">0</button>
-    <button class="num-btn del" onclick="pwDel()">⌫</button>
+    <button class="num-btn" onclick="pwDel()">⌫</button>
   </div>
 
   <div class="pw-clue">clue : your birthday</div>
@@ -473,15 +377,11 @@ audio { display: none; }
   <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
     <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <!-- Happy squint eyes -->
     <path d="M48 76 Q57 70 66 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
     <path d="M84 76 Q93 70 102 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <!-- Blush -->
     <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
     <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <!-- Happy open mouth -->
     <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <!-- Tail -->
     <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   </svg>
   <div style="font-size:1.1rem;font-weight:800;color:#1a2e6b;margin-bottom:4px;">Hi</div>
@@ -491,7 +391,6 @@ audio { display: none; }
 
 <!-- ==================== PAGE 3: ARE YOU READY ==================== -->
 <div class="page" id="page-ready">
-  <!-- Excited character with party items -->
   <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="75" cy="95" rx="42" ry="45" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
     <ellipse cx="75" cy="112" rx="22" ry="16" fill="white" stroke="#2a2a2a" stroke-width="2"/>
@@ -500,16 +399,12 @@ audio { display: none; }
     <ellipse cx="47" cy="88" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
     <ellipse cx="103" cy="88" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
     <path d="M63 90 Q75 100 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <!-- Yellow party popper left -->
     <rect x="20" y="90" width="12" height="28" rx="4" fill="#fde68a" stroke="#2a2a2a" stroke-width="2" transform="rotate(-20,26,104)"/>
     <circle cx="22" cy="87" r="5" fill="#fde047" stroke="#2a2a2a" stroke-width="1.5"/>
-    <!-- Purple party popper right -->
     <rect x="118" y="88" width="12" height="28" rx="4" fill="#c084fc" stroke="#2a2a2a" stroke-width="2" transform="rotate(20,124,102)"/>
     <circle cx="128" cy="85" r="5" fill="#a855f7" stroke="#2a2a2a" stroke-width="1.5"/>
-    <!-- Hearts -->
     <text x="100" y="75" font-size="14">🩷</text>
     <text x="110" y="90" font-size="10">💜</text>
-    <text x="95" y="95" font-size="8">🩷</text>
   </svg>
   <div class="title-big blue" style="font-size:1.3rem;">are you readyy to open<br>thisss?</div>
   <div class="btn-row" style="margin-top:12px;">
@@ -518,27 +413,20 @@ audio { display: none; }
   </div>
 </div>
 
-<!-- ==================== PAGE 4: NOO (angry) ==================== -->
+<!-- ==================== PAGE 4: NOO ==================== -->
 <div class="page" id="page-noo">
-  <!-- Angry character -->
   <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
     <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <!-- Angry brow -->
     <line x1="48" y1="68" x2="66" y2="74" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
     <line x1="84" y1="74" x2="102" y2="68" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
-    <!-- Squint angry eyes -->
     <path d="M50 76 Q57 72 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
     <path d="M85 76 Q93 72 101 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <!-- Blush red -->
     <ellipse cx="47" cy="84" rx="7" ry="4" fill="#fca5a5" opacity="0.8"/>
     <ellipse cx="103" cy="84" rx="7" ry="4" fill="#fca5a5" opacity="0.8"/>
-    <!-- Grumpy mouth -->
     <path d="M62 95 Q75 88 88 95" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <!-- Anger -->
     <text x="20" y="55" font-size="16">💢</text>
     <text x="108" y="52" font-size="14">💢</text>
-    <!-- Tail -->
     <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   </svg>
   <div class="title-big blue" style="font-size:1.2rem;">OH GITU SEKARANG KAMU<br>SAMA AKU? 😡</div>
@@ -547,26 +435,21 @@ audio { display: none; }
 
 <!-- ==================== PAGE 5: BIRTHDAY ==================== -->
 <div class="page" id="page-bday">
-  <!-- Excited crying happy -->
-  <div style="position:relative; width:160px; height:160px; margin-bottom:16px;">
-    <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-      <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-      <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-      <!-- Happy tear eyes -->
-      <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M85 76 Q92 70 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <ellipse cx="53" cy="86" rx="3" ry="5" fill="#aee0f8"/>
-      <ellipse cx="97" cy="86" rx="3" ry="5" fill="#aee0f8"/>
-      <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-      <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-      <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-      <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <!-- Stars around -->
-      <text x="18" y="72" font-size="14">⭐</text>
-      <text x="112" y="68" font-size="12">💚</text>
-      <text x="108" y="84" font-size="10">🌟</text>
-    </svg>
-  </div>
+  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+    <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M85 76 Q92 70 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="53" cy="86" rx="3" ry="5" fill="#aee0f8"/>
+    <ellipse cx="97" cy="86" rx="3" ry="5" fill="#aee0f8"/>
+    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
+    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
+    <path d="M62 88 Q75 100 88 88" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <text x="18" y="72" font-size="14">⭐</text>
+    <text x="112" y="68" font-size="12">💚</text>
+    <text x="108" y="84" font-size="10">🌟</text>
+  </svg>
   <div class="title-big blue">Today, this pretty girl turns<br>18! happy birthday,<br>my love 🤍</div>
   <button class="btn btn-solid" style="margin-top:16px;" onclick="goTo('page-msg')">open it &lt;3</button>
 </div>
@@ -576,114 +459,67 @@ audio { display: none; }
   <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
     <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <!-- Sleeping content eyes -->
     <path d="M50 76 Q57 82 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
     <path d="M85 76 Q92 82 100 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
     <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
     <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
     <path d="M62 90 Q75 100 88 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <!-- Sitting on hearts -->
     <text x="32" y="140" font-size="16">❤️</text>
     <text x="55" y="145" font-size="20">❤️</text>
     <text x="82" y="142" font-size="18">❤️</text>
     <text x="108" y="138" font-size="14">❤️</text>
   </svg>
   <div class="title-big blue">Happy birthday to my most<br>beautiful, loving, and caring<br>girlfriend 🤍</div>
-  <div class="subtitle" style="margin-top:4px;">I love youuu so muchh!!!</div>
+  <div style="font-size:1rem;font-weight:600;color:#1a2e6b;margin-top:4px;">I love youuu so muchh!!!</div>
   <button class="btn btn-solid" style="margin-top:20px;" onclick="goTo('page-p1')">i have something for you 💌</button>
 </div>
 
-<!-- ==================== PAGE 7: LAST ONE ==================== -->
-<div class="page" id="page-last">
-  <!-- Winking licking -->
-  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
-    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
-    <!-- One closed wink, one open -->
-    <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M85 78 Q92 74 100 78" stroke="#2a2a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
-    <!-- Tongue out -->
-    <path d="M63 90 Q75 98 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
-    <ellipse cx="83" cy="96" rx="8" ry="6" fill="#f87171" stroke="#2a2a2a" stroke-width="1.5"/>
-    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  </svg>
-  <div class="title-big blue" style="font-size:1.2rem;">okayy last one, i made something<br>for your birthday, read it slowly<br>okayyy</div>
-  <button class="btn-circle" style="margin-top:20px;" onclick="goTo('page-final')">&lt;3</button>
-</div>
-
-<!-- ==================== PHOTO PAGES (8 photos) ==================== -->
-<!-- Photo 1 -->
+<!-- ==================== 8 FOTO PAGES ==================== -->
 <div class="page" id="page-p1">
-  <div class="photo-frame">
-    <!-- GANTI: <img src="URL_FOTO_1" alt="foto 1"> -->
-    <div class="photo-placeholder"><span>📷</span>Foto 1<br><small>Ganti dengan foto kamu</small></div>
-  </div>
+  <div class="photo-frame"><img src="pika1.jpg" alt="foto 1"></div>
   <div class="title-big blue" style="font-size:1.1rem;">This was our first picture, a<br>moment I'll always remember</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p2')">klik ini&lt;3</button>
+  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p2')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 2 -->
 <div class="page" id="page-p2">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 2<br><small>Ganti dengan foto kamu</small></div>
-  </div>
+  <div class="photo-frame"><img src="pika2.jpg" alt="foto 2"></div>
   <div class="title-big blue" style="font-size:1.1rem;">I'm so grateful for every<br>moment we've shared since then</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p3')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 3 -->
 <div class="page" id="page-p3">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 3<br><small>Ganti dengan foto kamu</small></div>
-  </div>
-  <div class="title-big blue" style="font-size:1.1rem;">Thank you for being part of my<br>days and making them feel<br>special</div>
+  <div class="photo-frame"><img src="pika3.jpg" alt="foto 3"></div>
+  <div class="title-big blue" style="font-size:1.1rem;">Thank you for being part of my<br>days and making them feel special</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p4')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 4 -->
 <div class="page" id="page-p4">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 4<br><small>Ganti dengan foto kamu</small></div>
-  </div>
-  <div class="title-big blue" style="font-size:1.1rem;">I hope we keep creating<br>memories, big and small,<br>together</div>
+  <div class="photo-frame"><img src="pika4.jpg" alt="foto 4"></div>
+  <div class="title-big blue" style="font-size:1.1rem;">I hope we keep creating<br>memories, big and small, together</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p5')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 5 -->
 <div class="page" id="page-p5">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 5<br><small>Ganti dengan foto kamu</small></div>
-  </div>
+  <div class="photo-frame"><img src="pika5.jpg" alt="foto 5"></div>
   <div class="title-big blue" style="font-size:1.1rem;">you deserve the world and i'll<br>always love you</div>
-  <div class="body-text" style="text-align:center;">you never gave up on me and for that im forever grateful, thankful to have a girlfriend like you</div>
-  <button class="btn btn-solid" style="margin-top:8px;" onclick="goTo('page-p6')">klik ini &lt;3</button>
+  <div class="body-text" style="text-align:center;margin-top:4px;">you never gave up on me and for that im forever grateful, thankful to have a girlfriend like you</div>
+  <button class="btn btn-solid" onclick="goTo('page-p6')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 6 -->
 <div class="page" id="page-p6">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 6<br><small>Ganti dengan foto kamu</small></div>
-  </div>
+  <div class="photo-frame"><img src="pika6.jpg" alt="foto 6"></div>
   <div class="title-big blue" style="font-size:1.1rem;">every laugh, every smile —<br>all because of you 🤍</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p7')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 7 -->
 <div class="page" id="page-p7">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 7<br><small>Ganti dengan foto kamu</small></div>
-  </div>
+  <div class="photo-frame"><img src="pika7.jpg" alt="foto 7"></div>
   <div class="title-big blue" style="font-size:1.1rem;">i'm the luckiest person<br>to have you 🤍</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p8')">klik ini &lt;3</button>
 </div>
 
-<!-- Photo 8 -->
 <div class="page" id="page-p8">
-  <div class="photo-frame">
-    <div class="photo-placeholder"><span>📷</span>Foto 8<br><small>Ganti dengan foto kamu</small></div>
-  </div>
+  <div class="photo-frame"><img src="pika8.jpg" alt="foto 8"></div>
   <div class="title-big blue" style="font-size:1.1rem;">happy birthday sayang,<br>i love you always 🩷</div>
   <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-playlist')">klik ini &lt;3</button>
 </div>
@@ -692,9 +528,11 @@ audio { display: none; }
 <div class="page" id="page-playlist">
   <div class="playlist-card">
     <div class="playlist-header">
-      <div class="playlist-cover">🐰</div>
+      <div class="playlist-cover">
+        <img src="utama.jpg" alt="cover">
+      </div>
       <div class="playlist-meta">
-        <div class="playlist-title">for u · Pikachu</div>
+        <div class="playlist-title">for u · Pikachu 🩷</div>
         <div class="playlist-by">by: kamu 🩷</div>
       </div>
       <div class="spotify-icon">♫</div>
@@ -703,36 +541,53 @@ audio { display: none; }
       <div class="track-item">
         <div class="track-num">1</div>
         <div class="track-info">
-          <div class="track-name">Nama Lagu 1</div>
-          <div class="track-artist">Nama Artis 1</div>
+          <div class="track-name">Enchanted</div>
+          <div class="track-artist">Taylor Swift</div>
         </div>
-        <div class="track-dur">0:00</div>
+        <div class="track-dur">5:53</div>
       </div>
       <div class="track-item">
         <div class="track-num">2</div>
         <div class="track-info">
-          <div class="track-name">Nama Lagu 2</div>
-          <div class="track-artist">Nama Artis 2</div>
+          <div class="track-name">Fearless</div>
+          <div class="track-artist">Taylor Swift</div>
         </div>
-        <div class="track-dur">0:00</div>
+        <div class="track-dur">4:01</div>
       </div>
       <div class="track-item">
         <div class="track-num">3</div>
         <div class="track-info">
-          <div class="track-name">Nama Lagu 3</div>
-          <div class="track-artist">Nama Artis 3</div>
+          <div class="track-name">Shanty April</div>
+          <div class="track-artist">...</div>
         </div>
-        <div class="track-dur">0:00</div>
+        <div class="track-dur">3:30</div>
       </div>
     </div>
   </div>
   <button class="btn btn-solid" onclick="goTo('page-last')">Lanjut →</button>
 </div>
 
+<!-- ==================== LAST ONE PAGE ==================== -->
+<div class="page" id="page-last">
+  <svg class="char-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
+    <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
+    <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M85 78 Q92 74 100 78" stroke="#2a2a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="47" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
+    <ellipse cx="103" cy="84" rx="7" ry="4" fill="#f9a8d4" opacity="0.7"/>
+    <path d="M63 90 Q75 98 87 90" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
+    <ellipse cx="83" cy="96" rx="8" ry="6" fill="#f87171" stroke="#2a2a2a" stroke-width="1.5"/>
+    <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="title-big blue" style="font-size:1.2rem;">okayy last one, i made something<br>for your birthday, read it slowly<br>okayyy</div>
+  <button class="btn-circle" style="margin-top:20px;" onclick="goTo('page-final')">&lt;3</button>
+</div>
+
 <!-- ==================== FINAL LETTER PAGE ==================== -->
 <div class="page" id="page-final">
   <div class="floating-emojis" id="float-container"></div>
-  <div class="letter-box" style="position:relative;z-index:2;">
+  <div class="letter-box">
     <h2>Happy birthday, my love 🤍🤍</h2>
     <p>On your special day, I just want to remind you how grateful I am to have you in my life. Thank you for being the amazing person you are — kind, loving, and always making everything feel so warm and beautiful. I love you more than words can say, and I hope this day is as wonderful as you are. Happy birthday, pikachu 🩷</p>
   </div>
@@ -744,7 +599,7 @@ audio { display: none; }
 function goTo(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
   if (id === 'page-final') startFloating();
 }
 
@@ -765,8 +620,7 @@ function pwPress(n) {
         document.getElementById('pw-dots').classList.add('shake');
         setTimeout(() => {
           document.getElementById('pw-dots').classList.remove('shake');
-          pwVal = '';
-          updateDots();
+          pwVal = ''; updateDots();
           document.getElementById('pw-error').textContent = '';
         }, 700);
       }
@@ -775,13 +629,13 @@ function pwPress(n) {
 }
 
 function pwDel() {
-  pwVal = pwVal.slice(0, -1);
+  pwVal = pwVal.slice(0,-1);
   updateDots();
 }
 
 function updateDots() {
   for (let i = 0; i < 6; i++) {
-    document.getElementById('d' + i).classList.toggle('filled', i < pwVal.length);
+    document.getElementById('d'+i).classList.toggle('filled', i < pwVal.length);
   }
 }
 
@@ -799,31 +653,21 @@ document.getElementById('music-modal').addEventListener('click', function(e) {
 });
 
 function playTrack(n) {
-  // stop current
   if (currentTrack > 0) {
-    document.getElementById('audio' + currentTrack).pause();
-    document.getElementById('audio' + currentTrack).currentTime = 0;
-    document.getElementById('ticon' + currentTrack).textContent = '▶';
-    document.getElementById('tbtn' + currentTrack).classList.remove('playing');
+    document.getElementById('audio'+currentTrack).pause();
+    document.getElementById('audio'+currentTrack).currentTime = 0;
+    document.getElementById('ticon'+currentTrack).textContent = '▶';
+    document.getElementById('tbtn'+currentTrack).classList.remove('playing');
   }
-
-  const audio = document.getElementById('audio' + n);
-  if (audio.src.includes('GANTI_URL_LAGU')) {
-    alert('🎵 Ganti dulu URL lagu ' + n + ' di kode HTML!\nCari: GANTI_URL_LAGU_' + n + '.mp3');
-    currentTrack = 0; return;
-  }
-
-  if (currentTrack === n) {
-    currentTrack = 0; return;
-  }
-
+  if (currentTrack === n) { currentTrack = 0; return; }
+  const audio = document.getElementById('audio'+n);
   audio.play();
   currentTrack = n;
-  document.getElementById('ticon' + n).textContent = '⏸';
-  document.getElementById('tbtn' + n).classList.add('playing');
+  document.getElementById('ticon'+n).textContent = '⏸';
+  document.getElementById('tbtn'+n).classList.add('playing');
 }
 
-// ===== FLOATING EMOJIS (final page) =====
+// ===== FLOATING EMOJIS =====
 function startFloating() {
   const c = document.getElementById('float-container');
   c.innerHTML = '';
@@ -831,17 +675,16 @@ function startFloating() {
   function spawn() {
     const el = document.createElement('div');
     el.className = 'float-em';
-    el.textContent = items[Math.floor(Math.random() * items.length)];
-    el.style.left = (Math.random() * 95) + 'vw';
-    el.style.animationDuration = (4 + Math.random() * 5) + 's';
-    el.style.animationDelay = '0s';
-    el.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
+    el.textContent = items[Math.floor(Math.random()*items.length)];
+    el.style.left = (Math.random()*95)+'vw';
+    el.style.animationDuration = (4+Math.random()*5)+'s';
+    el.style.fontSize = (1.2+Math.random()*1.2)+'rem';
     c.appendChild(el);
-    setTimeout(() => el.remove(), 10000);
+    setTimeout(()=>el.remove(), 10000);
   }
-  for (let i = 0; i < 18; i++) setTimeout(spawn, i * 300);
+  for (let i=0;i<18;i++) setTimeout(spawn, i*300);
   setInterval(spawn, 600);
 }
 </script>
 </body>
-</html>
+  </html>
