@@ -2,192 +2,204 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>for u, pikachu 🩷</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-:root {
-  --bg: #e8f0fe;
-  --bg2: #dce8fd;
-  --blue-dark: #1e3a8a;
-  --blue-mid: #2d5be3;
-  --blue-btn: #1e3a8a;
-  --font: 'Nunito', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#e8f0fe;
+  --bd:#1e3a8a;
+  --bm:#2d5be3;
+  --font:'Nunito',sans-serif;
 }
-html,body { font-family:var(--font); background:var(--bg); color:var(--blue-dark); min-height:100vh; overflow-x:hidden; }
+html,body{font-family:var(--font);background:var(--bg);color:var(--bd);min-height:100vh;overflow-x:hidden;}
 
 /* ===== MUSIC FAB ===== */
-#music-fab {
-  position:fixed; top:18px; right:18px;
-  width:46px; height:46px; border-radius:50%;
-  background:white; border:2.5px solid var(--blue-mid);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.1rem; cursor:pointer; z-index:999;
-  box-shadow:0 2px 12px rgba(45,91,227,.18);
+#fab{
+  position:fixed;top:16px;right:16px;
+  width:44px;height:44px;border-radius:50%;
+  background:#fff;border:2.5px solid var(--bm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;z-index:9999;
+  box-shadow:0 2px 12px rgba(45,91,227,.2);
   transition:transform .2s;
 }
-#music-fab.spin { animation:spinNote 1s linear infinite; }
-@keyframes spinNote { to { transform:rotate(360deg); } }
-#music-fab:hover { transform:scale(1.1); }
+#fab.spin{animation:spinFab 1.2s linear infinite;}
+@keyframes spinFab{to{transform:rotate(360deg);}}
 
-/* ===== PAGE SYSTEM ===== */
-.page {
-  display:none; min-height:100vh;
-  flex-direction:column; align-items:center; justify-content:center;
-  padding:40px 24px; text-align:center;
-  background:linear-gradient(160deg,#e8f0fe 0%,#dce8fd 100%);
-  position:relative; overflow:hidden;
+/* ===== PAGES ===== */
+.page{
+  display:none;min-height:100vh;
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 22px 50px;text-align:center;
+  background:linear-gradient(155deg,#e8f0fe 0%,#d6e4fd 100%);
+  position:relative;overflow:hidden;
 }
-.page.active { display:flex; }
+.page.active{display:flex;}
 
-/* ===== ANIMATED CHAR ===== */
-.char-wrap { margin-bottom:20px; position:relative; }
-.char-wrap svg { display:block; }
-.bounce { animation:bounceAnim 2s ease-in-out infinite; }
-.wobble { animation:wobbleAnim 2.5s ease-in-out infinite; }
-.shake-idle { animation:shakeIdle 1.8s ease-in-out infinite; }
-.pulse-big { animation:pulseBig 1.5s ease-in-out infinite; }
-.float { animation:floatChar 3s ease-in-out infinite; }
-@keyframes bounceAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-@keyframes wobbleAnim { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
-@keyframes shakeIdle { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
-@keyframes pulseBig { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
-@keyframes floatChar { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(2deg)} }
+/* background blobs */
+.page::before,.page::after{
+  content:'';position:absolute;border-radius:50%;
+  background:rgba(45,91,227,.06);pointer-events:none;
+}
+.page::before{width:300px;height:300px;top:-80px;left:-80px;}
+.page::after{width:200px;height:200px;bottom:-50px;right:-50px;}
+
+/* ===== CHAR ANIMATIONS ===== */
+.anim-bounce{animation:aBounce 2s ease-in-out infinite;}
+.anim-wobble{animation:aWobble 2.2s ease-in-out infinite;}
+.anim-shake{animation:aShake 1.8s ease-in-out infinite;}
+.anim-pulse{animation:aPulse 1.6s ease-in-out infinite;}
+.anim-float{animation:aFloat 3s ease-in-out infinite;}
+.anim-spin{animation:aSpin 4s linear infinite;}
+@keyframes aBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes aWobble{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes aShake{0%,100%{transform:rotate(-4deg) translateX(0)}25%{transform:rotate(-4deg) translateX(-4px)}75%{transform:rotate(4deg) translateX(4px)}}
+@keyframes aPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes aFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+@keyframes aSpin{to{transform:rotate(360deg)}}
 
 /* ===== TYPOGRAPHY ===== */
-.title-big { font-size:1.4rem; font-weight:800; color:var(--blue-dark); line-height:1.4; margin-bottom:14px; }
-.title-big.blue { color:var(--blue-mid); }
-.body-text { font-size:.95rem; font-weight:400; color:#3a5a8a; line-height:1.75; margin-bottom:12px; max-width:340px; }
+.title{font-size:1.38rem;font-weight:800;color:var(--bd);line-height:1.4;margin-bottom:14px;}
+.title.bl{color:var(--bm);}
+.sub{font-size:.95rem;font-weight:500;color:#3a5a8a;line-height:1.75;max-width:330px;margin-bottom:12px;}
 
 /* ===== BUTTONS ===== */
-.btn { display:inline-block; padding:14px 36px; border-radius:50px; font-family:var(--font); font-size:1rem; font-weight:700; cursor:pointer; border:none; transition:transform .15s,box-shadow .15s; }
-.btn:active { transform:scale(.96); }
-.btn-solid { background:var(--blue-btn); color:white; box-shadow:0 4px 16px rgba(30,58,138,.25); }
-.btn-solid:hover { background:#2d4fd6; }
-.btn-outline { background:transparent; color:var(--blue-dark); border:2px solid var(--blue-dark); }
-.btn-row { display:flex; gap:14px; justify-content:center; }
-.btn-circle { width:60px; height:60px; border-radius:50%; background:var(--blue-btn); color:white; font-size:.9rem; font-weight:800; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; border:none; box-shadow:0 4px 16px rgba(30,58,138,.25); transition:transform .15s; }
-.btn-circle:hover { transform:scale(1.08); }
+.btn{display:inline-block;padding:14px 38px;border-radius:50px;font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s,background .15s;}
+.btn:active{transform:scale(.95);}
+.btn-s{background:var(--bd);color:#fff;box-shadow:0 4px 18px rgba(30,58,138,.28);}
+.btn-s:hover{background:#2d4fd6;}
+.btn-o{background:transparent;color:var(--bd);border:2.5px solid var(--bd);}
+.brow{display:flex;gap:14px;justify-content:center;margin-top:14px;}
+.bcircle{width:62px;height:62px;border-radius:50%;background:var(--bd);color:#fff;font-size:.95rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(30,58,138,.3);transition:transform .15s;}
+.bcircle:hover{transform:scale(1.08);}
 
 /* ===== PASSWORD ===== */
-#page-pw { justify-content:flex-start; padding-top:55px; }
-.pw-dots { display:flex; gap:14px; justify-content:center; margin:18px 0 28px; }
-.pw-dot { width:22px; height:22px; border-radius:50%; border:2.5px solid var(--blue-mid); background:transparent; transition:background .2s; }
-.pw-dot.filled { background:var(--blue-mid); }
-.numpad { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; width:min(340px,90vw); }
-.num-btn { aspect-ratio:1.4/1; background:white; border:none; border-radius:18px; font-family:var(--font); font-size:1.6rem; font-weight:800; color:var(--blue-dark); cursor:pointer; box-shadow:0 3px 10px rgba(30,58,138,.1); transition:transform .1s; }
-.num-btn:active { transform:scale(.92); }
-.num-btn.empty { background:transparent; box-shadow:none; pointer-events:none; }
-.pw-clue { margin-top:20px; font-size:.85rem; color:var(--blue-mid); font-weight:600; }
-.pw-error { margin-top:8px; font-size:.82rem; color:#e53e3e; min-height:18px; font-weight:700; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
-.shake { animation:shake .4s; }
+#page-pw{justify-content:flex-start;padding-top:52px;}
+.dots{display:flex;gap:14px;justify-content:center;margin:18px 0 26px;}
+.dot{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--bm);background:transparent;transition:background .18s,transform .18s;}
+.dot.on{background:var(--bm);transform:scale(1.1);}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;width:min(330px,90vw);}
+.nk{aspect-ratio:1.4/1;background:#fff;border:none;border-radius:18px;font-family:var(--font);font-size:1.6rem;font-weight:800;color:var(--bd);cursor:pointer;box-shadow:0 3px 10px rgba(30,58,138,.1);transition:transform .1s,box-shadow .1s;}
+.nk:active{transform:scale(.91);box-shadow:none;}
+.nk.empty{background:transparent;box-shadow:none;pointer-events:none;}
+.pw-clue{margin-top:18px;font-size:.85rem;color:var(--bm);font-weight:600;}
+.pw-err{margin-top:8px;font-size:.82rem;color:#e53e3e;min-height:18px;font-weight:700;}
+@keyframes kShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.do-shake{animation:kShake .4s;}
 
 /* ===== PHOTO ===== */
-.photo-frame { width:min(340px,90vw); border-radius:16px; overflow:hidden; margin-bottom:20px; box-shadow:0 4px 20px rgba(30,58,138,.14); aspect-ratio:4/3; background:#cdd9f5; }
-.photo-frame img,.photo-frame video { width:100%; height:100%; object-fit:cover; display:block; }
+.pframe{width:min(320px,88vw);border-radius:18px;overflow:hidden;margin-bottom:18px;box-shadow:0 6px 24px rgba(30,58,138,.16);aspect-ratio:4/3;background:#c8d8f8;}
+.pframe img,.pframe video{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* ===== SPOTIFY PLAYER ===== */
-.spotify-card {
-  width:min(340px,90vw);
-  background:linear-gradient(145deg,#1a1a2e,#2d2d4e);
-  border-radius:20px; padding:20px;
-  box-shadow:0 8px 32px rgba(0,0,0,.35);
-  margin-bottom:20px;
-}
-.sp-header { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
-.sp-cover { width:72px; height:72px; border-radius:10px; overflow:hidden; flex-shrink:0; }
-.sp-cover img { width:100%; height:100%; object-fit:cover; }
-.sp-meta { flex:1; }
-.sp-playlist-name { font-size:.95rem; font-weight:800; color:white; }
-.sp-playlist-sub { font-size:.75rem; color:#aaa; margin-top:3px; }
-.sp-logo { font-size:1.4rem; margin-left:auto; }
+.sp-wrap{width:min(350px,94vw);margin-bottom:20px;}
+.sp-card{background:linear-gradient(145deg,#0f0f1a,#1a1a2e);border-radius:22px;padding:0;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5);}
 
-/* Now playing bar */
-.sp-now { background:rgba(255,255,255,.08); border-radius:12px; padding:12px 14px; margin-bottom:14px; display:flex; align-items:center; gap:12px; }
-.sp-now-art { width:42px; height:42px; border-radius:8px; overflow:hidden; background:#444; flex-shrink:0; }
-.sp-now-art img { width:100%; height:100%; object-fit:cover; }
-.sp-now-info { flex:1; min-width:0; }
-.sp-now-name { font-size:.88rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.sp-now-artist { font-size:.75rem; color:#aaa; margin-top:2px; }
-.sp-controls { display:flex; align-items:center; gap:10px; }
-.sp-ctrl-btn { background:none; border:none; cursor:pointer; font-size:1rem; color:#ccc; padding:4px; transition:transform .15s,color .15s; }
-.sp-ctrl-btn:hover { color:white; transform:scale(1.15); }
-.sp-play-btn { width:36px; height:36px; border-radius:50%; background:#1DB954; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.95rem; color:white; transition:transform .15s; flex-shrink:0; }
-.sp-play-btn:hover { transform:scale(1.1); }
+/* album art banner */
+.sp-banner{position:relative;height:160px;overflow:hidden;}
+.sp-banner img{width:100%;height:100%;object-fit:cover;filter:brightness(.55);}
+.sp-banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,#0f0f1a 100%);}
+.sp-banner-text{position:absolute;bottom:14px;left:16px;text-align:left;}
+.sp-pname{font-size:1.1rem;font-weight:900;color:#fff;}
+.sp-psub{font-size:.75rem;color:#aaa;margin-top:2px;}
+.sp-logo{position:absolute;top:12px;right:14px;background:#1DB954;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:#fff;}
 
-/* Progress */
-.sp-progress { margin-bottom:14px; }
-.sp-prog-bar { height:4px; background:rgba(255,255,255,.2); border-radius:99px; cursor:pointer; position:relative; }
-.sp-prog-fill { height:100%; background:#1DB954; border-radius:99px; width:0%; transition:width .5s linear; }
-.sp-prog-times { display:flex; justify-content:space-between; font-size:.7rem; color:#888; margin-top:5px; }
+/* controls section */
+.sp-controls-wrap{padding:16px 16px 0;}
 
-/* Track list */
-.sp-track { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07); cursor:pointer; transition:background .15s; border-radius:8px; padding-left:4px; }
-.sp-track:last-child { border-bottom:none; }
-.sp-track:hover { background:rgba(255,255,255,.06); }
-.sp-track.playing .sp-tname { color:#1DB954; }
-.sp-track-num { width:18px; font-size:.8rem; color:#888; text-align:center; flex-shrink:0; }
-.sp-track-art { width:38px; height:38px; border-radius:6px; overflow:hidden; background:#444; flex-shrink:0; }
-.sp-track-art img { width:100%; height:100%; object-fit:cover; }
-.sp-track-info { flex:1; min-width:0; text-align:left; }
-.sp-tname { font-size:.85rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.sp-tartist { font-size:.73rem; color:#888; margin-top:2px; }
-.sp-tdur { font-size:.78rem; color:#888; flex-shrink:0; }
-.sp-eq { display:none; font-size:.7rem; }
-.sp-track.playing .sp-eq { display:block; color:#1DB954; animation:eqAnim .8s steps(3) infinite; }
-.sp-track.playing .sp-track-num { display:none; }
-@keyframes eqAnim { 0%{content:'▁▃▅'} 33%{content:'▃▅▁'} 66%{content:'▅▁▃'} }
+/* big play controls */
+.sp-big-ctrl{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.sp-big-info{text-align:left;flex:1;min-width:0;margin-right:12px;}
+.sp-big-name{font-size:1rem;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sp-big-artist{font-size:.78rem;color:#aaa;margin-top:2px;}
+.sp-btns{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.sbc{background:none;border:none;cursor:pointer;font-size:1.05rem;color:#ccc;padding:4px;transition:transform .15s,color .15s;}
+.sbc:hover{color:#fff;transform:scale(1.15);}
+.sp-playbtn{width:40px;height:40px;border-radius:50%;background:#1DB954;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;transition:transform .15s;flex-shrink:0;}
+.sp-playbtn:hover{transform:scale(1.1);}
+
+/* progress */
+.sp-prog{margin-bottom:12px;}
+.sp-pbar{height:4px;background:rgba(255,255,255,.18);border-radius:99px;cursor:pointer;position:relative;}
+.sp-pfill{height:100%;background:#1DB954;border-radius:99px;width:0%;transition:width .5s linear;position:relative;}
+.sp-pfill::after{content:'';position:absolute;right:-5px;top:-4px;width:12px;height:12px;border-radius:50%;background:#fff;display:none;}
+.sp-pbar:hover .sp-pfill::after{display:block;}
+.sp-times{display:flex;justify-content:space-between;font-size:.68rem;color:#666;margin-top:4px;}
+
+/* track list */
+.sp-list{border-top:1px solid rgba(255,255,255,.07);padding:8px 0 4px;}
+.sp-tr{display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;transition:background .15s;border-radius:10px;margin:0 4px;}
+.sp-tr:hover{background:rgba(255,255,255,.07);}
+.sp-tr.on .sp-tname{color:#1DB954;}
+.sp-tr.on .sp-tnum{display:none;}
+.sp-eq{display:none;font-size:.75rem;color:#1DB954;width:18px;text-align:center;}
+.sp-tr.on .sp-eq{display:block;}
+.sp-tnum{width:18px;font-size:.8rem;color:#666;text-align:center;flex-shrink:0;}
+.sp-tart{width:36px;height:36px;border-radius:6px;overflow:hidden;background:#333;flex-shrink:0;}
+.sp-tart img{width:100%;height:100%;object-fit:cover;}
+.sp-tinfo{flex:1;min-width:0;text-align:left;}
+.sp-tname{font-size:.85rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sp-tartist{font-size:.72rem;color:#888;margin-top:1px;}
+.sp-tdur{font-size:.75rem;color:#666;flex-shrink:0;}
+.sp-like{font-size:.9rem;color:#888;cursor:pointer;margin-left:4px;transition:color .15s,transform .2s;}
+.sp-like.liked{color:#1DB954;transform:scale(1.2);}
+
+/* shuffle/repeat row */
+.sp-extra{display:flex;justify-content:space-around;padding:10px 16px 16px;border-top:1px solid rgba(255,255,255,.05);}
+.sp-xbtn{background:none;border:none;cursor:pointer;font-size:.85rem;color:#666;font-family:var(--font);font-weight:600;transition:color .15s;}
+.sp-xbtn.on{color:#1DB954;}
+.sp-xbtn:hover{color:#aaa;}
 
 /* ===== SCROLLABLE LETTER ===== */
-#page-final { justify-content:flex-start; padding-top:70px; padding-bottom:60px; }
-.floating-emojis { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
-.float-em { position:absolute; animation:floatEm linear; font-size:1.6rem; opacity:0; }
-@keyframes floatEm { 0%{transform:translateY(100vh) rotate(-15deg);opacity:0} 10%{opacity:1} 90%{opacity:.8} 100%{transform:translateY(-80px) rotate(15deg);opacity:0} }
+#page-final{justify-content:flex-start;padding-top:65px;padding-bottom:60px;}
+.floats{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.fem{position:absolute;animation:fEm linear;opacity:0;}
+@keyframes fEm{0%{transform:translateY(100vh) rotate(-15deg);opacity:0}10%{opacity:1}90%{opacity:.8}100%{transform:translateY(-80px) rotate(15deg);opacity:0}}
 
-.letter-wrap { position:relative; z-index:2; width:min(360px,92vw); }
-.letter-card {
-  background:rgba(255,255,255,.7);
-  backdrop-filter:blur(8px);
-  border-radius:20px;
-  padding:28px 24px 32px;
-  box-shadow:0 4px 24px rgba(30,58,138,.12);
-  max-height:65vh;
+.lcard-wrap{position:relative;z-index:2;width:min(360px,92vw);}
+.lcard{
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(10px);
+  border-radius:22px;
+  padding:26px 22px 30px;
+  box-shadow:0 6px 28px rgba(30,58,138,.13);
+  max-height:62vh;
   overflow-y:auto;
   scroll-behavior:smooth;
   text-align:left;
 }
-.letter-card::-webkit-scrollbar { width:4px; }
-.letter-card::-webkit-scrollbar-thumb { background:#2d5be3; border-radius:99px; }
-.letter-title { font-size:1.15rem; font-weight:900; color:var(--blue-dark); margin-bottom:16px; text-align:center; }
-.letter-para { font-size:.93rem; color:#2a4a7a; line-height:1.8; margin-bottom:14px; border-left:3px solid var(--blue-mid); padding-left:12px; }
-.letter-sign { font-size:.9rem; font-weight:700; color:var(--blue-mid); margin-top:18px; text-align:right; font-style:italic; }
-.scroll-hint-letter { font-size:.78rem; color:#7a9fd4; text-align:center; margin-top:8px; animation:bounceAnim 1.5s ease-in-out infinite; }
+.lcard::-webkit-scrollbar{width:3px;}
+.lcard::-webkit-scrollbar-thumb{background:var(--bm);border-radius:99px;}
+.ltitle{font-size:1.12rem;font-weight:900;color:var(--bd);margin-bottom:16px;text-align:center;}
+.lpara{font-size:.91rem;color:#2a4a7a;line-height:1.82;margin-bottom:14px;padding-left:12px;border-left:3px solid var(--bm);}
+.lsign{font-size:.88rem;font-weight:700;color:var(--bm);margin-top:18px;text-align:right;font-style:italic;}
+.scroll-hint{font-size:.75rem;color:#88aad4;text-align:center;margin-top:7px;animation:aBounce 1.5s ease-in-out infinite;}
 
 /* ===== PARTICLES ===== */
-.particle { position:fixed; pointer-events:none; z-index:500; font-size:1.2rem; animation:particlePop .8s forwards; }
-@keyframes particlePop { 0%{opacity:1;transform:scale(0) translateY(0)} 60%{opacity:1;transform:scale(1.2) translateY(-30px)} 100%{opacity:0;transform:scale(.8) translateY(-60px)} }
+.ptcl{position:fixed;pointer-events:none;z-index:9998;font-size:1.1rem;animation:ptclPop .9s forwards;}
+@keyframes ptclPop{0%{opacity:1;transform:scale(0) translateY(0)}60%{opacity:1;transform:scale(1.3) translateY(-35px)}100%{opacity:0;transform:scale(.8) translateY(-65px)}}
 
-audio { display:none; }
+audio{display:none;}
 </style>
 </head>
 <body>
 
-<div id="music-fab" onclick="toggleMusicPanel()">🎵</div>
+<div id="fab" onclick="fabClick()">🎵</div>
 
-<!-- Hidden audios -->
-<audio id="a-fearless"  src="fearless.mp3"></audio>
-<audio id="a-enchanted" src="Enchanted.mp3"></audio>
-<audio id="a-sunshine"  src="sunshine.mp3"></audio>
-<audio id="a-rewrite"   src="rewrite.mp3"></audio>
-<audio id="a-shanty"    src="shantyapril.mp3"></audio>
-<audio id="a-18"        src="18.mp3"></audio>
+<!-- 6 audio elements -->
+<audio id="au0" src="fearless.mp3"></audio>
+<audio id="au1" src="Enchanted.mp3"></audio>
+<audio id="au2" src="sunshine.mp3"></audio>
+<audio id="au3" src="rewrite.mp3"></audio>
+<audio id="au4" src="shantyapril.mp3"></audio>
+<audio id="au5" src="18.mp3"></audio>
 
-<!-- ==================== PAGE 1: PASSWORD ==================== -->
+<!-- ============================== PAGE 1: PASSWORD ============================== -->
 <div class="page active" id="page-pw">
-  <div class="char-wrap shake-idle">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-shake" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <line x1="53" y1="74" x2="61" y2="82" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
@@ -201,37 +213,29 @@ audio { display:none; }
       <path d="M65 93 Q75 102 85 93" stroke="#2a2a2a" stroke-width="2.5" fill="#e05555" stroke-linecap="round"/>
       <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
       <text x="24" y="55" font-size="17">💢</text>
-      <text x="108" y="58" font-size="13">💨</text>
+      <text x="107" y="58" font-size="13">💨</text>
     </svg>
   </div>
-  <div class="title-big" style="font-size:1.15rem;margin-bottom:6px;">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
-  <div class="pw-dots" id="pw-dots">
-    <div class="pw-dot" id="d0"></div><div class="pw-dot" id="d1"></div>
-    <div class="pw-dot" id="d2"></div><div class="pw-dot" id="d3"></div>
-    <div class="pw-dot" id="d4"></div><div class="pw-dot" id="d5"></div>
+  <div class="title" style="font-size:1.12rem;margin-bottom:6px;">Hi love, ayo tebak passwordnya,<br>I bet u knoww!!</div>
+  <div class="dots" id="pw-dots">
+    <div class="dot" id="d0"></div><div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div><div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div><div class="dot" id="d5"></div>
   </div>
   <div class="numpad">
-    <button class="num-btn" onclick="pwPress('1')">1</button>
-    <button class="num-btn" onclick="pwPress('2')">2</button>
-    <button class="num-btn" onclick="pwPress('3')">3</button>
-    <button class="num-btn" onclick="pwPress('4')">4</button>
-    <button class="num-btn" onclick="pwPress('5')">5</button>
-    <button class="num-btn" onclick="pwPress('6')">6</button>
-    <button class="num-btn" onclick="pwPress('7')">7</button>
-    <button class="num-btn" onclick="pwPress('8')">8</button>
-    <button class="num-btn" onclick="pwPress('9')">9</button>
-    <button class="num-btn empty"></button>
-    <button class="num-btn" onclick="pwPress('0')">0</button>
-    <button class="num-btn" onclick="pwDel()">⌫</button>
+    <button class="nk" onclick="pwp('1')">1</button><button class="nk" onclick="pwp('2')">2</button><button class="nk" onclick="pwp('3')">3</button>
+    <button class="nk" onclick="pwp('4')">4</button><button class="nk" onclick="pwp('5')">5</button><button class="nk" onclick="pwp('6')">6</button>
+    <button class="nk" onclick="pwp('7')">7</button><button class="nk" onclick="pwp('8')">8</button><button class="nk" onclick="pwp('9')">9</button>
+    <button class="nk empty"></button><button class="nk" onclick="pwp('0')">0</button><button class="nk" onclick="pwd()">⌫</button>
   </div>
   <div class="pw-clue">clue : your birthday 🩷</div>
-  <div class="pw-error" id="pw-error"></div>
+  <div class="pw-err" id="pw-err"></div>
 </div>
 
-<!-- ==================== PAGE 2: HI PRETTY ==================== -->
+<!-- ============================== PAGE 2: HI PRETTY ============================== -->
 <div class="page" id="page-hi">
-  <div class="char-wrap bounce">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-bounce" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <path d="M48 76 Q57 70 66 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -242,15 +246,15 @@ audio { display:none; }
       <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
   </div>
-  <div style="font-size:1.1rem;font-weight:800;color:var(--blue-dark);margin-bottom:4px;">Hi</div>
-  <div class="title-big blue" style="font-size:1.5rem;">hi, pretty 🤲👋</div>
-  <button class="btn btn-solid" style="margin-top:10px;" onclick="goTo('page-ready')">tap disinii &lt;3</button>
+  <div style="font-size:1.1rem;font-weight:800;margin-bottom:4px;">Hi</div>
+  <div class="title bl" style="font-size:1.5rem;">hi, pretty 🤲👋</div>
+  <button class="btn btn-s" style="margin-top:12px;" onclick="goTo('page-ready')">tap disinii &lt;3</button>
 </div>
 
-<!-- ==================== PAGE 3: ARE YOU READY ==================== -->
+<!-- ============================== PAGE 3: READY ============================== -->
 <div class="page" id="page-ready">
-  <div class="char-wrap wobble">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-wobble" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="95" rx="42" ry="45" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="112" rx="22" ry="16" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <path d="M50 80 Q59 74 68 80" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -262,21 +266,20 @@ audio { display:none; }
       <circle cx="22" cy="87" r="5" fill="#fde047" stroke="#2a2a2a" stroke-width="1.5"/>
       <rect x="118" y="88" width="12" height="28" rx="4" fill="#c084fc" stroke="#2a2a2a" stroke-width="2" transform="rotate(20,124,102)"/>
       <circle cx="128" cy="85" r="5" fill="#a855f7" stroke="#2a2a2a" stroke-width="1.5"/>
-      <text x="100" y="75" font-size="14">🩷</text>
-      <text x="110" y="90" font-size="10">💜</text>
+      <text x="100" y="75" font-size="14">🩷</text><text x="110" y="90" font-size="10">💜</text>
     </svg>
   </div>
-  <div class="title-big blue">are you readyy to open<br>thisss?</div>
-  <div class="btn-row" style="margin-top:14px;">
-    <button class="btn btn-solid" onclick="goTo('page-bday')">yess</button>
-    <button class="btn btn-outline" onclick="goTo('page-noo')">noo</button>
+  <div class="title bl">are you readyy to open<br>thisss?</div>
+  <div class="brow">
+    <button class="btn btn-s" onclick="goTo('page-bday')">yess</button>
+    <button class="btn btn-o" onclick="goTo('page-noo')">noo</button>
   </div>
 </div>
 
-<!-- ==================== PAGE 4: NOO ==================== -->
+<!-- ============================== PAGE 4: NOO ============================== -->
 <div class="page" id="page-noo">
-  <div class="char-wrap shake-idle">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-shake" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <line x1="48" y1="68" x2="66" y2="74" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
@@ -286,19 +289,18 @@ audio { display:none; }
       <ellipse cx="47" cy="84" rx="7" ry="4" fill="#fca5a5" opacity=".8"/>
       <ellipse cx="103" cy="84" rx="7" ry="4" fill="#fca5a5" opacity=".8"/>
       <path d="M62 95 Q75 88 88 95" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <text x="20" y="55" font-size="16">💢</text>
-      <text x="108" y="52" font-size="14">💢</text>
+      <text x="20" y="55" font-size="16">💢</text><text x="108" y="52" font-size="14">💢</text>
       <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
   </div>
-  <div class="title-big blue">OH GITU SEKARANG KAMU<br>SAMA AKU? 😡</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-ready')">back</button>
+  <div class="title bl">OH GITU SEKARANG KAMU<br>SAMA AKU? 😡</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="goTo('page-ready')">back</button>
 </div>
 
-<!-- ==================== PAGE 5: BIRTHDAY ==================== -->
+<!-- ============================== PAGE 5: BDAY ============================== -->
 <div class="page" id="page-bday">
-  <div class="char-wrap pulse-big">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-pulse" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -312,14 +314,14 @@ audio { display:none; }
       <text x="16" y="72" font-size="14">⭐</text><text x="112" y="68" font-size="12">💚</text><text x="108" y="84" font-size="10">🌟</text>
     </svg>
   </div>
-  <div class="title-big blue">Today, this pretty girl turns<br>18! happy birthday,<br>my love 🤍</div>
-  <button class="btn btn-solid" style="margin-top:16px;" onclick="goTo('page-msg')">open it &lt;3</button>
+  <div class="title bl">Today, this pretty girl turns 18!<br>happy birthday, my love 🤍</div>
+  <button class="btn btn-s" style="margin-top:16px;" onclick="goTo('page-msg')">open it &lt;3</button>
 </div>
 
-<!-- ==================== PAGE 6: I HAVE SOMETHING ==================== -->
+<!-- ============================== PAGE 6: MSG ============================== -->
 <div class="page" id="page-msg">
-  <div class="char-wrap float">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-float" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <path d="M50 76 Q57 82 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -331,133 +333,111 @@ audio { display:none; }
       <text x="82" y="142" font-size="17">❤️</text><text x="108" y="138" font-size="13">❤️</text>
     </svg>
   </div>
-  <div class="title-big blue">Happy birthday to my most<br>beautiful, loving, and caring<br>girlfriend 🤍</div>
-  <div style="font-size:1rem;font-weight:600;color:var(--blue-dark);margin-top:4px;">I love youuu so muchh!!!</div>
-  <button class="btn btn-solid" style="margin-top:20px;" onclick="goTo('page-p1')">i have something for you 💌</button>
+  <div class="title bl">Happy birthday to my most<br>beautiful, loving, and caring<br>girlfriend 🤍</div>
+  <div class="sub" style="text-align:center;">I love youuu so muchh!!!</div>
+  <button class="btn btn-s" style="margin-top:16px;" onclick="goTo('page-p1')">i have something for you 💌</button>
 </div>
 
-<!-- ==================== 8 PHOTO PAGES ==================== -->
+<!-- ============================== 8 PHOTO PAGES ============================== -->
 <div class="page" id="page-p1">
-  <div class="photo-frame"><img src="pika1.jpg" alt="foto 1"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">This was our first picture, a<br>moment I'll always remember 🤍</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p2');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika1.jpg" alt="foto 1"></div>
+  <div class="title bl" style="font-size:1.05rem;">This was our first picture, a<br>moment I'll always remember 🤍</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-p2',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p2">
-  <div class="photo-frame"><img src="pika2.jpg" alt="foto 2"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">I'm so grateful for every<br>moment we've shared since then</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p3');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika2.jpg" alt="foto 2"></div>
+  <div class="title bl" style="font-size:1.05rem;">I'm so grateful for every<br>moment we've shared since then</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-p3',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p3">
-  <div class="photo-frame"><img src="pika3.jpg" alt="foto 3"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">Thank you for being part of my<br>days and making them feel special</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p4');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika3.jpg" alt="foto 3"></div>
+  <div class="title bl" style="font-size:1.05rem;">Thank you for being part of my<br>days and making them feel special</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-p4',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p4">
-  <div class="photo-frame"><img src="pika5.jpg" alt="foto 4"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">I hope we keep creating<br>memories, big and small, together</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p5');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika5.jpg" alt="foto 4"></div>
+  <div class="title bl" style="font-size:1.05rem;">I hope we keep creating<br>memories, big and small, together</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-p5',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p5">
-  <div class="photo-frame"><img src="pika6.jpg" alt="foto 5"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">you deserve the world and i'll<br>always love you</div>
-  <div class="body-text" style="text-align:center;margin-top:4px;">you never gave up on me and for that im forever grateful 🤍</div>
-  <button class="btn btn-solid" onclick="goTo('page-p6');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika6.jpg" alt="foto 5"></div>
+  <div class="title bl" style="font-size:1.05rem;">you deserve the world and i'll<br>always love you</div>
+  <div class="sub" style="text-align:center;margin-top:4px;">you never gave up on me and for that im forever grateful 🤍</div>
+  <button class="btn btn-s" onclick="nx('page-p6',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p6">
-  <div class="photo-frame"><img src="pika7.jpg" alt="foto 6"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">every laugh, every smile —<br>all because of you 🤍</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p7');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika7.jpg" alt="foto 6"></div>
+  <div class="title bl" style="font-size:1.05rem;">every laugh, every smile —<br>all because of you 🤍</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-p7',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p7">
-  <div class="photo-frame"><img src="pika9.jpg" alt="foto 7"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">i'm the luckiest person<br>to have you 🤍</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-p8');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika9.jpg" alt="foto 7"></div>
+  <div class="title bl" style="font-size:1.05rem;">i'm the luckiest person<br>to have you 🤍</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-p8',event)">klik ini &lt;3</button>
 </div>
 <div class="page" id="page-p8">
-  <div class="photo-frame"><img src="pika10.jpg" alt="foto 8"></div>
-  <div class="title-big blue" style="font-size:1.1rem;">happy birthday sayang,<br>i love you always 🩷</div>
-  <button class="btn btn-solid" style="margin-top:14px;" onclick="goTo('page-playlist');spawnHearts(event)">klik ini &lt;3</button>
+  <div class="pframe"><img src="pika10.jpg" alt="foto 8"></div>
+  <div class="title bl" style="font-size:1.05rem;">happy birthday sayang,<br>i love you always 🩷</div>
+  <button class="btn btn-s" style="margin-top:14px;" onclick="nx('page-playlist',event)">klik ini &lt;3</button>
 </div>
 
-<!-- ==================== SPOTIFY PLAYER PAGE ==================== -->
+<!-- ============================== SPOTIFY PLAYER PAGE ============================== -->
 <div class="page" id="page-playlist">
-  <div class="spotify-card">
-    <!-- Header -->
-    <div class="sp-header">
-      <div class="sp-cover"><img src="utama.jpg" alt="cover"></div>
-      <div class="sp-meta">
-        <div class="sp-playlist-name">for u · Pikachu 🩷</div>
-        <div class="sp-playlist-sub">by: kamu • 3 songs</div>
-      </div>
-      <div class="sp-logo">🎵</div>
-    </div>
-
-    <!-- Now playing -->
-    <div class="sp-now" id="sp-now">
-      <div class="sp-now-art"><img id="sp-now-img" src="utama.jpg" alt="art"></div>
-      <div class="sp-now-info">
-        <div class="sp-now-name" id="sp-now-name">Fearless</div>
-        <div class="sp-now-artist" id="sp-now-artist">Taylor Swift</div>
-      </div>
-      <div class="sp-controls">
-        <button class="sp-ctrl-btn" onclick="spPrev()">⏮</button>
-        <button class="sp-play-btn" id="sp-play-btn" onclick="spToggle()">▶</button>
-        <button class="sp-ctrl-btn" onclick="spNext()">⏭</button>
-      </div>
-    </div>
-
-    <!-- Progress bar -->
-    <div class="sp-progress">
-      <div class="sp-prog-bar" id="sp-prog-bar" onclick="spSeek(event)">
-        <div class="sp-prog-fill" id="sp-prog-fill"></div>
-      </div>
-      <div class="sp-prog-times">
-        <span id="sp-cur">0:00</span>
-        <span id="sp-dur">0:00</span>
-      </div>
-    </div>
-
-    <!-- Track list -->
-    <div id="sp-tracklist">
-      <div class="sp-track playing" id="sp-t0" onclick="spPlayTrack(0)">
-        <div class="sp-track-num">1</div>
-        <div class="sp-eq">▁▃▅</div>
-        <div class="sp-track-art"><img src="utama.jpg" alt="art"></div>
-        <div class="sp-track-info">
-          <div class="sp-tname">Fearless</div>
-          <div class="sp-tartist">Taylor Swift</div>
+  <div class="sp-wrap">
+    <div class="sp-card">
+      <!-- Banner -->
+      <div class="sp-banner">
+        <img src="utama.jpg" alt="cover">
+        <div class="sp-banner-overlay"></div>
+        <div class="sp-banner-text">
+          <div class="sp-pname">for u · Pikachu 🩷</div>
+          <div class="sp-psub">by: kamu • 6 songs</div>
         </div>
-        <div class="sp-tdur" id="dur0">4:01</div>
+        <div class="sp-logo">♫</div>
       </div>
-      <div class="sp-track" id="sp-t1" onclick="spPlayTrack(1)">
-        <div class="sp-track-num">2</div>
-        <div class="sp-eq">▁▃▅</div>
-        <div class="sp-track-art"><img src="utama.jpg" alt="art"></div>
-        <div class="sp-track-info">
-          <div class="sp-tname">Enchanted</div>
-          <div class="sp-tartist">Taylor Swift</div>
+
+      <!-- Big controls -->
+      <div class="sp-controls-wrap">
+        <div class="sp-big-ctrl">
+          <div class="sp-big-info">
+            <div class="sp-big-name" id="sp-bname">Fearless</div>
+            <div class="sp-big-artist" id="sp-bartist">Taylor Swift</div>
+          </div>
+          <div class="sp-btns">
+            <button class="sbc" onclick="spPrev()" title="prev">⏮</button>
+            <button class="sp-playbtn" id="sp-pb" onclick="spToggle()">▶</button>
+            <button class="sbc" onclick="spNext()" title="next">⏭</button>
+          </div>
         </div>
-        <div class="sp-tdur" id="dur1">5:53</div>
+
+        <!-- Progress -->
+        <div class="sp-prog">
+          <div class="sp-pbar" id="sp-pbar" onclick="spSeek(event)">
+            <div class="sp-pfill" id="sp-pfill"></div>
+          </div>
+          <div class="sp-times"><span id="sp-cur">0:00</span><span id="sp-dur">0:00</span></div>
+        </div>
       </div>
-      <div class="sp-track" id="sp-t2" onclick="spPlayTrack(2)">
-        <div class="sp-track-num">3</div>
-        <div class="sp-eq">▁▃▅</div>
-        <div class="sp-track-art"><img src="utama.jpg" alt="art"></div>
-        <div class="sp-track-info">
-          <div class="sp-tname">Sunshine</div>
-          <div class="sp-tartist">...</div>
-        </div>
-        <div class="sp-tdur" id="dur2">3:30</div>
+
+      <!-- Track list -->
+      <div class="sp-list" id="sp-list">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- Shuffle / Repeat -->
+      <div class="sp-extra">
+        <button class="sp-xbtn" id="btn-shuf" onclick="toggleShuffle()">⇄ Shuffle</button>
+        <button class="sp-xbtn" id="btn-rep" onclick="toggleRepeat()">↻ Repeat</button>
       </div>
     </div>
   </div>
-  <button class="btn btn-solid" onclick="goTo('page-last')">Lanjut →</button>
+  <button class="btn btn-s" onclick="goTo('page-last')">Lanjut →</button>
 </div>
 
-<!-- ==================== LAST ONE PAGE ==================== -->
+<!-- ============================== LAST ONE ============================== -->
 <div class="page" id="page-last">
-  <div class="char-wrap wobble">
-    <svg width="140" height="140" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <div class="anim-wobble" style="margin-bottom:18px;">
+    <svg width="145" height="145" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="75" cy="90" rx="42" ry="48" fill="#6ec6e8" stroke="#2a2a2a" stroke-width="2.5"/>
       <ellipse cx="75" cy="108" rx="22" ry="18" fill="white" stroke="#2a2a2a" stroke-width="2"/>
       <path d="M50 76 Q57 70 65 76" stroke="#2a2a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -469,240 +449,246 @@ audio { display:none; }
       <path d="M40 115 Q20 125 25 140 Q30 150 38 145" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
   </div>
-  <div class="title-big blue" style="font-size:1.2rem;">okayy last one, i made something<br>for your birthday, read it slowly<br>okayyy</div>
-  <button class="btn-circle" style="margin-top:20px;" onclick="goTo('page-final')">&lt;3</button>
+  <div class="title bl" style="font-size:1.15rem;">okayy last one, i made something<br>for your birthday, read it slowly<br>okayyy</div>
+  <button class="bcircle" style="margin-top:22px;" onclick="goTo('page-final')">&lt;3</button>
 </div>
 
-<!-- ==================== FINAL SCROLLABLE LETTER ==================== -->
+<!-- ============================== FINAL LETTER ============================== -->
 <div class="page" id="page-final">
-  <div class="floating-emojis" id="float-container"></div>
-  <div class="letter-wrap">
-    <div class="letter-card" id="letter-card">
-      <div class="letter-title">🤍 Happy Birthday, Pikachu 🤍</div>
-
-      <p class="letter-para">
-        Selamat ulang tahun, sayangku. Hari ini kamu resmi bertambah satu tahun lagi, dan aku ingin kamu tahu betapa berartinya hari ini — bukan hanya karena itu hari lahirmu, tapi karena dunia ini jadi tempat yang jauh lebih indah sejak kamu ada di dalamnya.
-      </p>
-
-      <p class="letter-para">
-        I still remember the very first time I saw you. I didn't know it then, but that was the moment everything started to change for me. You walked in with that smile of yours — the one that makes everything else disappear — and I thought, <em>"wow, I'm in trouble."</em>
-      </p>
-
-      <p class="letter-para">
-        Terima kasih sudah selalu ada. Terima kasih untuk setiap pesan pagi yang kamu kirim, untuk setiap kali kamu ketawa karena hal-hal kecil yang bodoh, untuk setiap malam yang kamu temani aku meskipun kamu juga lelah. Kamu nggak pernah tahu betapa banyak hal-hal kecil itu berarti buatku.
-      </p>
-
-      <p class="letter-para">
-        You are the kind of person who makes everyone around you feel safe and loved. And I — I am the luckiest person in the world because I get to be the one closest to you. I get to see the real you, the one behind all the jokes and the laughs, and honestly? I love that version of you the most.
-      </p>
-
-      <p class="letter-para">
-        Ada hari-hari yang berat, aku tahu. Tapi aku juga tahu satu hal yang pasti: aku nggak mau ngelewatin hari-hari itu tanpa kamu. Kamu bukan cuma pacar aku — kamu adalah teman terbaik aku, rumah yang aku selalu pengen pulang ke sana.
-      </p>
-
-      <p class="letter-para">
-        On your birthday, I wish you all the happiness the universe can possibly hold. I wish you days full of sunshine and nights full of peace. I wish that every dream you've been quietly holding onto starts to come true, one by one.
-      </p>
-
-      <p class="letter-para">
-        Dan aku berjanji — aku akan terus ada. Di hari-hari yang biasa, di momen-momen yang nggak sempurna, di setiap detik yang kadang rasanya nggak berarti. Aku di sini. Selalu.
-      </p>
-
-      <p class="letter-para">
-        I love you more than Fearless, more than Enchanted, more than any Taylor Swift song could ever describe. You are my favorite story — and I hope we're only on the first chapter.
-      </p>
-
-      <p class="letter-para">
-        Selamat ulang tahun, Pikachu. Semoga panjang umur, sehat selalu, dan selalu bahagia. Kamu layak mendapatkan semua yang terbaik di dunia ini — dan aku akan terus berusaha jadi salah satu dari hal terbaik itu untukmu 🩷
-      </p>
-
-      <div class="letter-sign">— dengan cinta yang nggak ada habisnya, dari aku yang selalu menyayangimu 🤍</div>
+  <div class="floats" id="fc"></div>
+  <div class="lcard-wrap">
+    <div class="lcard" id="lcard">
+      <div class="ltitle">🤍 Happy Birthday, Pikachu 🤍</div>
+      <p class="lpara">Selamat ulang tahun, sayangku. Hari ini kamu resmi bertambah satu tahun lagi, dan aku ingin kamu tahu betapa berartinya hari ini — bukan hanya karena itu hari lahirmu, tapi karena dunia ini jadi tempat yang jauh lebih indah sejak kamu ada di dalamnya.</p>
+      <p class="lpara">I still remember the very first time I saw you. I didn't know it then, but that was the moment everything started to change for me. You walked in with that smile of yours — the one that makes everything else disappear — and I thought, <em>"wow, I'm in trouble."</em></p>
+      <p class="lpara">Terima kasih sudah selalu ada. Terima kasih untuk setiap pesan pagi yang kamu kirim, untuk setiap kali kamu ketawa karena hal-hal kecil yang bodoh, untuk setiap malam yang kamu temani aku meskipun kamu juga lelah. Kamu nggak pernah tahu betapa banyak hal-hal kecil itu berarti buatku.</p>
+      <p class="lpara">You are the kind of person who makes everyone around you feel safe and loved. And I — I am the luckiest person in the world because I get to be the one closest to you. I get to see the real you, the one behind all the jokes and the laughs, and honestly? I love that version of you the most.</p>
+      <p class="lpara">Ada hari-hari yang berat, aku tahu. Tapi aku juga tahu satu hal yang pasti: aku nggak mau ngelewatin hari-hari itu tanpa kamu. Kamu bukan cuma pacar aku — kamu adalah teman terbaik aku, rumah yang selalu aku pengen pulang ke sana.</p>
+      <p class="lpara">On your birthday, I wish you all the happiness the universe can possibly hold. I wish you days full of sunshine and nights full of peace. I wish that every dream you've been quietly holding onto starts to come true, one by one.</p>
+      <p class="lpara">Dan aku berjanji — aku akan terus ada. Di hari-hari yang biasa, di momen-momen yang nggak sempurna, di setiap detik yang kadang rasanya nggak berarti. Aku di sini. Selalu.</p>
+      <p class="lpara">I love you more than Fearless, more than Enchanted, more than any Taylor Swift song could ever describe. Kamu adalah cerita favoritku — dan aku harap kita masih baru di bab pertama.</p>
+      <p class="lpara">Selamat ulang tahun, Pikachu. Semoga panjang umur, sehat selalu, dan selalu bahagia. Kamu layak mendapatkan semua yang terbaik di dunia — dan aku akan terus berusaha jadi salah satu dari hal terbaik itu untukmu.</p>
+      <p class="lpara">Sampai ketemu di hari-hari berikutnya, di momen-momen yang belum kita buat, di kenangan-kenangan yang belum sempat kita ceritakan. Aku sayang kamu, selalu dan selamanya. 🩷</p>
+      <div class="lsign">— dengan cinta yang nggak ada habisnya, dari aku 🤍</div>
     </div>
-    <div class="scroll-hint-letter">↓ scroll untuk baca semua ↓</div>
+    <div class="scroll-hint">↓ scroll untuk baca semua ↓</div>
   </div>
 </div>
 
 <script>
-// ===== TRACKS CONFIG =====
+// ===== TRACKS DATA =====
 const TRACKS = [
-  { id:'a-fearless',  name:'Fearless',  artist:'Taylor Swift' },
-  { id:'a-enchanted', name:'Enchanted', artist:'Taylor Swift' },
-  { id:'a-sunshine',  name:'Sunshine',  artist:'...' },
+  {src:'fearless.mp3',   name:'Fearless',      artist:'Taylor Swift'},
+  {src:'Enchanted.mp3',  name:'Enchanted',     artist:'Taylor Swift'},
+  {src:'sunshine.mp3',   name:'Sunshine',      artist:'...'},
+  {src:'rewrite.mp3',    name:'Rewrite The Stars', artist:'...'},
+  {src:'shantyapril.mp3',name:'Shanty April',  artist:'...'},
+  {src:'18.mp3',         name:'18',            artist:'...'},
 ];
-let spIdx = 0;
-let spPlaying = false;
 
-function getAudio(i) { return document.getElementById(TRACKS[i].id); }
+let curIdx = 0, isPlaying = false, shuffle = false, repeat = false;
+const audios = TRACKS.map((t,i) => {
+  const a = document.getElementById('au'+i); return a;
+});
+
+// Build track list UI
+function buildList() {
+  const list = document.getElementById('sp-list');
+  list.innerHTML = '';
+  TRACKS.forEach((t,i) => {
+    const div = document.createElement('div');
+    div.className = 'sp-tr' + (i===curIdx?' on':'');
+    div.id = 'tr'+i;
+    div.onclick = () => playIdx(i);
+    div.innerHTML = `
+      <div class="sp-tnum">${i+1}</div>
+      <div class="sp-eq">▁▃▅</div>
+      <div class="sp-tart"><img src="utama.jpg" alt=""></div>
+      <div class="sp-tinfo">
+        <div class="sp-tname">${t.name}</div>
+        <div class="sp-tartist">${t.artist}</div>
+      </div>
+      <span class="sp-like" id="lk${i}" onclick="event.stopPropagation();toggleLike(${i})">♡</span>
+      <div class="sp-tdur" id="td${i}">--:--</div>`;
+    list.appendChild(div);
+    // get duration
+    audios[i].addEventListener('loadedmetadata', () => {
+      document.getElementById('td'+i).textContent = fmt(audios[i].duration);
+    });
+  });
+}
+
+function playIdx(i) {
+  if (isPlaying) { audios[curIdx].pause(); audios[curIdx].currentTime = 0; }
+  curIdx = i;
+  audios[i].play().catch(()=>{});
+  isPlaying = true;
+  updateUI();
+}
+
+function spToggle() {
+  if (isPlaying) {
+    audios[curIdx].pause(); isPlaying = false;
+    document.getElementById('sp-pb').textContent = '▶';
+    document.getElementById('fab').classList.remove('spin');
+  } else {
+    audios[curIdx].play().catch(()=>{});
+    isPlaying = true;
+    document.getElementById('sp-pb').textContent = '⏸';
+    document.getElementById('fab').classList.add('spin');
+  }
+}
+
+function spNext() {
+  let next;
+  if (shuffle) { do { next = Math.floor(Math.random()*TRACKS.length); } while(next===curIdx && TRACKS.length>1); }
+  else next = (curIdx+1) % TRACKS.length;
+  playIdx(next);
+}
+
+function spPrev() {
+  if (audios[curIdx].currentTime > 3) { audios[curIdx].currentTime = 0; return; }
+  playIdx((curIdx-1+TRACKS.length) % TRACKS.length);
+}
+
+function spSeek(e) {
+  const bar = document.getElementById('sp-pbar');
+  const rect = bar.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(1, (e.clientX-rect.left)/rect.width));
+  if (audios[curIdx].duration) audios[curIdx].currentTime = pct * audios[curIdx].duration;
+}
+
+function updateUI() {
+  const t = TRACKS[curIdx];
+  document.getElementById('sp-bname').textContent = t.name;
+  document.getElementById('sp-bartist').textContent = t.artist;
+  document.getElementById('sp-pb').textContent = '⏸';
+  document.getElementById('fab').classList.add('spin');
+  TRACKS.forEach((_,i) => {
+    const el = document.getElementById('tr'+i);
+    if (el) el.className = 'sp-tr' + (i===curIdx?' on':'');
+  });
+}
+
+// Progress ticker
+setInterval(() => {
+  if (!isPlaying) return;
+  const a = audios[curIdx];
+  if (a.duration) {
+    document.getElementById('sp-pfill').style.width = (a.currentTime/a.duration*100)+'%';
+    document.getElementById('sp-cur').textContent = fmt(a.currentTime);
+    document.getElementById('sp-dur').textContent = fmt(a.duration);
+  }
+}, 400);
+
+// Auto next
+audios.forEach((a,i) => a.addEventListener('ended', () => {
+  if (repeat) { a.currentTime=0; a.play(); } else spNext();
+}));
+
+function toggleShuffle() {
+  shuffle = !shuffle;
+  document.getElementById('btn-shuf').classList.toggle('on', shuffle);
+}
+function toggleRepeat() {
+  repeat = !repeat;
+  document.getElementById('btn-rep').classList.toggle('on', repeat);
+}
+
+const liked = new Set();
+function toggleLike(i) {
+  const el = document.getElementById('lk'+i);
+  if (liked.has(i)) { liked.delete(i); el.textContent='♡'; el.classList.remove('liked'); }
+  else { liked.add(i); el.textContent='♥'; el.classList.add('liked'); }
+}
+
+function fmt(s) { return Math.floor(s/60)+':'+Math.floor(s%60).toString().padStart(2,'0'); }
+
+// FAB click — play/pause from anywhere
+function fabClick() {
+  const cur = document.querySelector('.page.active');
+  if (cur && cur.id === 'page-playlist') return;
+  if (!isPlaying && curIdx === 0 && audios[0].currentTime === 0) { playIdx(0); return; }
+  spToggle();
+}
 
 // ===== PAGE NAV =====
 function goTo(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
-  if (id === 'page-final') startFloating();
+  if (id === 'page-final') startFloat();
 }
 
+function nx(id, e) { spawnPtcl(e); goTo(id); }
+
 // ===== PASSWORD =====
-const CORRECT = '090806';
-let pwVal = '';
-function pwPress(n) {
-  if (pwVal.length >= 6) return;
-  pwVal += n;
-  updateDots();
-  if (pwVal.length === 6) {
+const PW = '090806';
+let pv = '';
+function pwp(n) {
+  if (pv.length >= 6) return;
+  pv += n; updDots();
+  if (pv.length === 6) {
     setTimeout(() => {
-      if (pwVal === CORRECT) {
+      if (pv === PW) {
         goTo('page-hi');
-        // Auto play first track
-        setTimeout(() => spPlayTrack(0), 600);
+        setTimeout(() => playIdx(0), 500);
       } else {
-        document.getElementById('pw-error').textContent = 'salah password! coba lagi ya 🥺';
-        document.getElementById('pw-dots').classList.add('shake');
+        document.getElementById('pw-err').textContent = 'salah password! coba lagi ya 🥺';
+        document.getElementById('pw-dots').classList.add('do-shake');
         setTimeout(() => {
-          document.getElementById('pw-dots').classList.remove('shake');
-          pwVal = ''; updateDots();
-          document.getElementById('pw-error').textContent = '';
+          document.getElementById('pw-dots').classList.remove('do-shake');
+          pv=''; updDots();
+          document.getElementById('pw-err').textContent = '';
         }, 700);
       }
     }, 200);
   }
 }
-function pwDel() { pwVal = pwVal.slice(0,-1); updateDots(); }
-function updateDots() {
-  for (let i=0;i<6;i++) document.getElementById('d'+i).classList.toggle('filled', i < pwVal.length);
+function pwd() { pv=pv.slice(0,-1); updDots(); }
+function updDots() {
+  for(let i=0;i<6;i++) document.getElementById('d'+i).classList.toggle('on', i<pv.length);
 }
 
-// ===== SPOTIFY PLAYER =====
-function spPlayTrack(i) {
-  // Stop previous
-  if (spPlaying) {
-    getAudio(spIdx).pause();
-    getAudio(spIdx).currentTime = 0;
-  }
-  spIdx = i;
-  const audio = getAudio(i);
-  audio.play().catch(()=>{});
-  spPlaying = true;
-  updateSpUI();
-  document.getElementById('music-fab').classList.add('spin');
-}
-
-function spToggle() {
-  const audio = getAudio(spIdx);
-  if (spPlaying) {
-    audio.pause(); spPlaying = false;
-    document.getElementById('sp-play-btn').textContent = '▶';
-    document.getElementById('music-fab').classList.remove('spin');
-  } else {
-    audio.play().catch(()=>{});
-    spPlaying = true;
-    document.getElementById('sp-play-btn').textContent = '⏸';
-    document.getElementById('music-fab').classList.add('spin');
-  }
-}
-
-function spNext() {
-  spPlayTrack((spIdx + 1) % TRACKS.length);
-}
-function spPrev() {
-  const audio = getAudio(spIdx);
-  if (audio.currentTime > 3) { audio.currentTime = 0; return; }
-  spPlayTrack((spIdx - 1 + TRACKS.length) % TRACKS.length);
-}
-
-function updateSpUI() {
-  const t = TRACKS[spIdx];
-  document.getElementById('sp-now-name').textContent = t.name;
-  document.getElementById('sp-now-artist').textContent = t.artist;
-  document.getElementById('sp-play-btn').textContent = '⏸';
-  // Track list highlight
-  for (let i=0;i<TRACKS.length;i++) {
-    document.getElementById('sp-t'+i).classList.toggle('playing', i===spIdx);
-  }
-}
-
-// Progress update
-setInterval(() => {
-  if (!spPlaying) return;
-  const audio = getAudio(spIdx);
-  if (audio.duration) {
-    const pct = (audio.currentTime / audio.duration) * 100;
-    document.getElementById('sp-prog-fill').style.width = pct + '%';
-    document.getElementById('sp-cur').textContent = fmt(audio.currentTime);
-    document.getElementById('sp-dur').textContent = fmt(audio.duration);
-  }
-}, 500);
-
-// Auto next
-TRACKS.forEach((t,i) => {
-  getAudio(i).addEventListener('ended', () => spNext());
-});
-
-function spSeek(e) {
-  const bar = document.getElementById('sp-prog-bar');
-  const rect = bar.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  const audio = getAudio(spIdx);
-  if (audio.duration) audio.currentTime = pct * audio.duration;
-}
-
-function fmt(s) {
-  const m = Math.floor(s/60);
-  return m + ':' + Math.floor(s%60).toString().padStart(2,'0');
-}
-
-// Music FAB toggle — show/hide player panel
-function toggleMusicPanel() {
-  const pg = document.getElementById('page-playlist');
-  const cur = document.querySelector('.page.active');
-  if (cur && cur.id === 'page-playlist') return;
-  // just toggle play/pause from anywhere
-  spToggle();
-}
-
-// ===== HEART PARTICLES on button click =====
-function spawnHearts(e) {
-  const emojis = ['🩷','💙','⭐','✨','💜'];
-  for (let i=0;i<6;i++) {
+// ===== PARTICLES =====
+function spawnPtcl(e) {
+  const ems = ['🩷','💙','⭐','✨','💜','🤍'];
+  for(let i=0;i<7;i++) {
     const el = document.createElement('div');
-    el.className = 'particle';
-    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-    el.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
-    el.style.top = (e.clientY - 10) + 'px';
-    el.style.animationDelay = (i*0.07)+'s';
+    el.className = 'ptcl';
+    el.textContent = ems[Math.floor(Math.random()*ems.length)];
+    el.style.left = (e.clientX + (Math.random()-.5)*70)+'px';
+    el.style.top = (e.clientY - 10)+'px';
+    el.style.animationDelay = (i*.06)+'s';
     document.body.appendChild(el);
-    setTimeout(()=>el.remove(), 1000);
+    setTimeout(()=>el.remove(), 1100);
   }
 }
 
-// ===== FLOATING EMOJIS final page =====
-function startFloating() {
-  const c = document.getElementById('float-container');
-  c.innerHTML = '';
-  const items = ['💙','⭐','🌟','💙','⭐','✨','💛','🩷','💜','⭐'];
-  let running = true;
+// ===== FLOATING EMOJIS =====
+function startFloat() {
+  const c = document.getElementById('fc'); c.innerHTML='';
+  const items = ['💙','⭐','🌟','💙','⭐','✨','💛','🩷','💜','⭐','🤍','💫'];
+  let alive = true;
   function spawn() {
-    if (!running) return;
+    if (!alive) return;
     const el = document.createElement('div');
-    el.className = 'float-em';
+    el.className = 'fem';
     el.textContent = items[Math.floor(Math.random()*items.length)];
     el.style.left = (Math.random()*95)+'vw';
-    const dur = 4 + Math.random()*5;
+    const dur = 4+Math.random()*5;
     el.style.animationDuration = dur+'s';
-    el.style.fontSize = (1.1+Math.random()*1.3)+'rem';
+    el.style.fontSize = (1+Math.random()*1.4)+'rem';
     c.appendChild(el);
-    setTimeout(()=>el.remove(), dur*1000+200);
+    setTimeout(()=>el.remove(), dur*1000+300);
   }
-  for(let i=0;i<20;i++) setTimeout(spawn,i*250);
-  const iv = setInterval(spawn, 550);
-  // Stop spawning if user leaves page
-  const obs = new MutationObserver(()=>{
-    if (!document.getElementById('page-final').classList.contains('active')) {
-      running = false; clearInterval(iv); obs.disconnect();
-    }
-  });
-  obs.observe(document.body, {attributes:true, subtree:true, attributeFilter:['class']});
+  for(let i=0;i<22;i++) setTimeout(spawn, i*220);
+  const iv = setInterval(spawn,500);
+  setTimeout(()=>{ alive=false; clearInterval(iv); }, 60000);
 }
+
+// Init
+buildList();
 </script>
 </body>
 </html>
